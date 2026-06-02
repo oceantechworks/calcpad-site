@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CalcPad 使い方ガイド</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --accent: #0f766e;
+      --accent-soft: #e6fffa;
+      --code-bg: #f3f4f6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", sans-serif;
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    .page {
+      width: min(100%, 920px);
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    header,
+    nav,
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      line-height: 1.35;
+      margin-top: 0;
+      color: var(--text);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      font-size: 1.12rem;
+      margin-top: 24px;
+      margin-bottom: 8px;
+    }
+
+    h4 {
+      font-size: 1rem;
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    ul,
+    ol {
+      padding-left: 1.4em;
+      margin-top: 8px;
+      margin-bottom: 14px;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .lead {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .toc-list {
+      columns: 1;
+      list-style-position: inside;
+      padding-left: 0;
+    }
+
+    .toc-sublist {
+      list-style-position: inside;
+      margin-top: 6px;
+      margin-bottom: 0;
+      padding-left: 1.2em;
+      font-size: 0.95rem;
+    }
+
+    .note {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin: 14px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 18px;
+      overflow-wrap: anywhere;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f9fafb;
+      font-weight: 700;
+    }
+
+    td.numeric {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      background: var(--code-bg);
+      border-radius: 6px;
+      padding: 0.08em 0.35em;
+      font-size: 0.95em;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border-radius: 12px;
+      padding: 12px 14px;
+      overflow-x: auto;
+      margin: 10px 0 16px;
+      border: 1px solid var(--border);
+    }
+
+    pre code {
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+      font-size: 0.94em;
+      white-space: pre;
+    }
+
+    .back-to-toc {
+      margin-top: 22px;
+      margin-bottom: 0;
+      text-align: right;
+      font-size: 0.95rem;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 16px 12px 40px;
+      }
+
+      header,
+      nav,
+      section {
+        padding: 16px;
+        border-radius: 14px;
+      }
+
+      h1 {
+        font-size: 1.55rem;
+      }
+
+      h2 {
+        font-size: 1.22rem;
+      }
+
+      table {
+        font-size: 0.94rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header id="top">
+      <h1>CalcPad 使い方ガイド</h1>
+    </header>
+
+    <nav id="toc" aria-label="目次">
+      <h2>目次</h2>
+      <ol class="toc-list">
+        <li><a href="#section-1">CalcPadでできること</a></li>
+        <li><a href="#section-2">通常の電卓として使う</a></li>
+        <li><a href="#section-3">計算式を作成する</a></li>
+        <li><a href="#section-4">作成した計算式を使う</a></li>
+        <li><a href="#section-5">プリセットを使う</a></li>
+        <li><a href="#section-6">COPYを使う</a></li>
+        <li><a href="#section-7">PASTEを使う</a></li>
+        <li><a href="#section-8">HISTORY（コピー履歴）を使う</a></li>
+        <li><a href="#section-9">関数を使う（PRO機能）</a></li>
+        <li>
+          <a href="#section-10">関数一覧と使用例</a>
+          <ol class="toc-sublist">
+            <li><a href="#function-sqrt">平方根：√</a></li>
+            <li><a href="#function-abs">絶対値：|x|</a></li>
+            <li><a href="#function-pi">円周率：π</a></li>
+            <li><a href="#function-e">ネイピア数：e</a></li>
+            <li><a href="#function-exp">eのx乗：e^x</a></li>
+            <li><a href="#function-trig">三角関数：sin / cos / tan</a></li>
+            <li><a href="#function-log">常用対数：log</a></li>
+            <li><a href="#function-ln">自然対数：ln</a></li>
+            <li><a href="#function-round">四捨五入：round</a></li>
+            <li><a href="#function-floor">切り下げ：floor</a></li>
+            <li><a href="#function-ceil">切り上げ：ceil</a></li>
+            <li><a href="#function-min">最小値：min</a></li>
+            <li><a href="#function-max">最大値：max</a></li>
+            <li><a href="#function-comma">カンマ：,</a></li>
+          </ol>
+        </li>
+        <li><a href="#section-11">関数を使うときの注意点</a></li>
+        <li><a href="#section-12">まとめ</a></li>
+      </ol>
+    </nav>
+
+    <section id="section-1">
+      <h2>1. CalcPadでできること</h2>
+      <p>CalcPadでは、主に以下のことができます。</p>
+      <ul>
+        <li>通常の電卓として計算する</li>
+        <li>よく使う計算式を作成・保存する</li>
+        <li>保存した計算式を呼び出して、変数だけ入力して計算する</li>
+        <li>よく使う数値をプリセットとして登録する</li>
+        <li>計算結果や式をコピーする</li>
+        <li>コピー履歴から過去にコピーした値を再利用する</li>
+        <li>基本的な関数を使って計算する</li>
+      </ul>
+      <p class="back-to-toc"><a href="#toc">目次へ戻る</a></p>
+    </section>
+
+    <section id="section-2">
+      <h2>2. 通常の電卓として使う</h2>
+      <p>CalcPadのメイン画面では、一般的な電卓と同じように数値や演算子を入力して計算できます。</p>
+
+      <h3>基本操作</h3>
+      <ol>
+        <li>数値を入力します。</li>
+        <li><code>+</code>、<code>−</code>、<code>×</code>、<code>÷</code> などの演算子を入力します。</li>
+        <li><code>=</code> をタップすると計算結果が表示されます。</li>
+      </ol>
+
+      <p>計算結果はディスプレイ上にログとして残るため、直前の計算内容を確認しながら続けて計算できます。</p>
+      <p class="back-to-toc"><a href="#toc">目次へ戻る</a></p>
+    </section>
+
+    <section id="section-3">
+      <h2>3. 計算式を作成する</h2>
+      <p>CalcPadの特徴は、よく使う計算式を作成して保存できることです。</p>
+      <p>たとえば、次のような計算式を登録できます。</p>
+
+      <pre><code>単価 × 数量
+時給 × 作業時間 + 基本給
+売上 − 経費
+体重 ÷ 身長 ^ 2</code></pre>
+
+      <p>保存した計算式は、あとから呼び出して、必要な値だけを入力して計算できます。</p>
+
+      <h3>計算式作成の流れ</h3>
+      <ol>
+        <li>基本情報を入力する</li>
+        <li>結果表示設定を確認する</li>
+        <li>変数を定義する</li>
+        <li>計算式を作成する</li>
+        <li>保存する</li>
+      </ol>
+
+      <h3>3.1 基本情報を入力する</h3>
+      <p>まず、計算式の名前を入力します。</p>
+      <p>名前は、あとから計算式一覧で見たときに分かりやすいものにしておくと便利です。</p>
+
+      <h3>3.2 結果表示設定を確認する</h3>
+      <p>計算結果の表示方法を設定できます。</p>
+      <ul>
+        <li>結果名：計算結果をどのような名前で表示するか（未入力の場合は「結果」と表示）</li>
+        <li>小数桁数：計算結果として表示する小数の桁数</li>
+        <li>端数処理：指定した小数桁数に丸める際の方法（四捨五入 / 切り下げ / 切り上げ）</li>
+      </ul>
+      <p>金額計算では小数点以下を表示しない、比率計算では小数点以下を表示する、というように、計算式ごとに適した表示に調整できます。</p>
+
+      <h3>3.3 変数を定義する</h3>
+      <p>変数とは、計算するたびに入力する値のことです。</p>
+      <p>たとえば、次の計算式では <code>単価</code> と <code>数量</code> が変数です。</p>
+
+      <pre><code>単価 × 数量 × 1.1</code></pre>
+
+      <p>計算式を実行するときに、<code>単価</code> と <code>数量</code> の値を入力すると、CalcPadが結果を計算します。</p>
+
+      <h4>変数の追加</h4>
+      <p>変数を追加する際には、以下の情報を入力します。</p>
+      <ul>
+        <li>タイプ：数値 / パーセント（％）</li>
+        <li>変数名：変数の名前（例：単価、数量など）</li>
+        <li>初期値：変数にあらかじめ値を入れておきたい場合に入力します。この値は計算ごとに変更できます。</li>
+        <li>キー（a〜z）：計算式を作成する際に、変数名の代わりに使うアルファベット</li>
+      </ul>
+
+      <h3>3.4 計算式を作成する</h3>
+      <p>変数を使って、実際の計算式を作成します。</p>
+      <p>例：</p>
+      <pre><code>a：単価
+b：数量
+
+a × b × 1.1</code></pre>
+
+      <p>変数を使うことで、毎回変わる値だけを入力して同じ計算を繰り返せます。</p>
+
+      <h3>3.5 関数を含む計算式を作成する</h3>
+      <p>PROでは、計算式の中でも基本的な関数を使えます。</p>
+
+      <pre><code>max(売上1, 売上2, 売上3)</code></pre>
+      <pre><code>|予定額 - 実績額|</code></pre>
+      <pre><code>round(単価 × 数量)</code></pre>
+
+      <p>関数を使うことで、最大値、最小値、差額、丸め処理などを含む計算式を作成できます。</p>
+      <p>三角関数を使う計算式では、角度単位（DEG / RAD）を設定できます。この角度単位は、その計算式だけに適用されます。</p>
+
+      <p class="back-to-toc"><a href="#toc">目次へ戻る</a></p>
+    </section>
+
+    <section id="section-4">
+      <h2>4. 作成した計算式を使う</h2>
+      <p>保存した計算式は、計算式一覧から呼び出して使用できます。</p>
+
+      <h3>使い方</h3>
+      <ol>
+        <li>計算式一覧を開きます（電卓キーパッドの <code>f(x)</code> ボタン）。</li>
+        <li>使用したい計算式を選択します。</li>
+        <li>表示された変数に値を入力します。</li>
+        <li>必要な値をすべて入力すると、計算結果が表示されます。</li>
+      </ol>
+
+      <h3>例：単価 × 数量 × 1.1</h3>
+      <p>登録した計算式：</p>
+      <pre><code>単価 × 数量 × 1.1</code></pre>
+
+      <p>実行時に入力する値：</p>
+      <pre><code>[単価] = 1200
+[数量] = 3</code></pre>
+
+      <p>結果：</p>
+      <pre><code>[結果] = 3960</code></pre>
+
+      <p>同じ計算式を何度も使う場合でも、毎回入力するのは変数の値だけです。</p>
+      <p class="back-to-toc"><a href="#toc">目次へ戻る</a></p>
+    </section>
+
+    <section id="section-5">
+      <h2>5. プリセットを使う</h2>
+      <p>プリセットは、よく使う数値を登録しておける機能です。</p>
+      <p>たとえば、税率、手数料、よく使う単価、固定費などを登録しておくと、入力の手間を減らせます。</p>
+
+      <h3>プリセットの例</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>ラベル</th>
+            <th>値</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>消費税10%</td>
+            <td class="numeric">0.1</td>
+          </tr>
+          <tr>
+            <td>手数料</td>
+            <td class="numeric">330</td>
+          </tr>
+          <tr>
+            <td>基本料金</td>
+            <td class="numeric">980</td>
+          </tr>
+          <tr>
+            <td>時給</td>
+            <td class="numeric">1500</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>5.1 プリセットを使う</h3>
+      <ol>
+        <li>電卓キーパッドの <code>PRE</code> ボタンをタップして、プリセットシートを開きます。</li>
+        <li>入力したいプリセットをタップします。</li>
+      </ol>
+
+      <h3>5.2 プリセットの追加 / 編集 / 削除</h3>
+      <ul>
+        <li>プリセットシート右上の <code>+</code> ボタンから追加できます。</li>
+        <li>各プリセット右端の三点メニューから編集 / 削除を行えます。</li>
+      </ul>
+
+      <p class="back-to-toc"><a href="#toc">目次へ戻る</a></p>
+    </section>
+
+    <section id="section-6">
+      <h2>6. COPYを使う</h2>
+      <p>CalcPadでは、計算結果やログの内容をコピーできます。</p>
+
+      <h3>6.1 直前の計算結果をコピーする</h3>
+      <p><code>COPY</code> ボタンをタップすると、直前の計算結果をコピーできます。</p>
+      <p>たとえば、次のような結果が表示されている場合：</p>
+
+      <pre><code>1200 × 5 × 80%
+= 4800</code></pre>
+
+      <p><code>COPY</code> をタップすると、<code>4800</code> をコピーできます。</p>
+      <p>コピーした値は、あとで <code>PASTE</code> で貼り付けたり、プリセットに登録したりできます。</p>
+
+      <h3>6.2 ログ行を選択してコピーする</h3>
+      <p>ディスプレイのログ行（計算履歴行）を長押しすると、その行を選択できます。</p>
+      <p>選択した状態で <code>COPY</code> をタップすると、その行の式や値をコピーできます。</p>
+
+      <p>たとえば、次のようなログがある場合：</p>
+      <pre><code>1200 × 5 × 80%
+= 4800</code></pre>
+
+      <p>式の行を選択すれば式をコピーでき、結果の行を選択すれば結果をコピーできます。</p>
+      <p class="back-to-toc"><a href="#toc">目次へ戻る</a></p>
+    </section>
+
+    <section id="section-7">
+      <h2>7. PASTEを使う</h2>
+      <p><code>PASTE</code> は、直前にコピーした値や式を入力欄に貼り付ける機能です。</p>
+
+      <h3>使い方</h3>
+      <ol>
+        <li><code>COPY</code> で値や式をコピーします。</li>
+        <li>貼り付けたい位置にカーソルを移動します。</li>
+        <li><code>PASTE</code> をタップします。</li>
+      </ol>
+
+      <p>コピーした結果を別の計算に続けて使いたいときに便利です。</p>
+      <p class="back-to-toc"><a href="#toc">目次へ戻る</a></p>
+    </section>
+
+    <section id="section-8">
+      <h2>8. HISTORY（コピー履歴）を使う</h2>
+      <p><code>PASTE</code> ボタンを長押しすると、コピー履歴シートを開けます。</p>
+      <p>コピー履歴には、過去にコピーした値や式が保存されます。</p>
+
+      <h3>HISTORYでできること</h3>
+      <ul>
+        <li>履歴から選択して貼り付ける</li>
+        <li>履歴の値をプリセットに登録する</li>
+        <li>履歴の内容をOSのクリップボードへコピーする</li>
+        <li>不要な履歴を削除する</li>
+      </ul>
+
+      <p class="back-to-toc"><a href="#toc">目次へ戻る</a></p>
+    </section>
+
+    <section id="section-9">
+      <h2>9. 関数を使う（PRO機能）</h2>
+      <p>PROでは、基本的な関数や定数を使えます。</p>
+      <p>関数は、通常の電卓画面や計算式作成画面で使用できます。</p>
+
+      <h3>関数キーパッドを開く</h3>
+      <p>通常の電卓画面では、キーパッド上部の <code>Func</code> ボタンから関数キーパッドを開けます。</p>
+      <p>関数キーパッドでは、平方根、絶対値、三角関数、対数、丸め、最大値、最小値などを入力できます。</p>
+
+      <h3>9.1 角度単位について</h3>
+      <p><code>sin</code>、<code>cos</code>、<code>tan</code> などの三角関数では、角度単位を使用します。</p>
+      <p>CalcPadでは、以下の角度単位を選べます。</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>表示</th>
+            <th>意味</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>DEG</td>
+            <td>度数法</td>
+          </tr>
+          <tr>
+            <td>RAD</td>
+            <td>ラジアン</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>通常の電卓画面で選んだ角度単位は、通常電卓用の設定として保存されます。</p>
+      <p>計算式作成画面では、角度単位は計算式ごとに保存されます。そのため、通常電卓の角度単位を変更しても、保存済みの計算式の結果が変わることはありません。</p>
+
+      <h3>9.2 入力後に関数パネルを閉じる</h3>
+      <p>関数キーパッドには、入力後に自動で閉じる設定があります。</p>
+      <p>OFFの場合、関数を入力しても関数キーパッドは開いたままです。ONの場合、関数を入力したあとに関数キーパッドが閉じます。</p>
+      <p>複数の関数を続けて入力したい場合は、OFFのまま使うと便利です。</p>
+
+      <p class="back-to-toc"><a href="#toc">目次へ戻る</a></p>
+    </section>
+
+    <section id="section-10">
+      <h2>10. 関数一覧と使用例</h2>
+      <p>ここでは、CalcPadで使える主な関数と定数を紹介します。</p>
+
+      <h3 id="function-sqrt">10.1 平方根：√</h3>
+      <p>平方根を求める関数です。</p>
+      <pre><code>√(9)</code></pre>
+      <p>結果：</p>
+      <pre><code>3</code></pre>
+      <p>面積から正方形の一辺を求めるような計算に使えます。</p>
+
+      <h3 id="function-abs">10.2 絶対値：|x|</h3>
+      <p>絶対値は、値を常に0以上の数として扱うための関数です。</p>
+      <pre><code>|1200 - 1500|</code></pre>
+      <p>結果：</p>
+      <pre><code>300</code></pre>
+      <p>差額や誤差を、プラスの値として見たいときに便利です。</p>
+
+      <h4>使用例：予定額と実績額の差を見る</h4>
+      <pre><code>|予定額 - 実績額|</code></pre>
+      <p>予定より多いか少ないかに関係なく、差の大きさだけを求められます。</p>
+
+      <h3 id="function-pi">10.3 円周率：π</h3>
+      <p>円周率を入力できます。</p>
+      <pre><code>π</code></pre>
+      <p>円の計算などに使えます。</p>
+
+      <h4>使用例：半径5の円の面積</h4>
+      <pre><code>π × 5 ^ 2</code></pre>
+
+      <h3 id="function-e">10.4 ネイピア数：e</h3>
+      <p>ネイピア数を入力できます。</p>
+      <pre><code>e</code></pre>
+      <p>指数計算や自然対数の計算で使います。</p>
+
+      <h3 id="function-exp">10.5 eのx乗：e^x</h3>
+      <p><code>e</code> を指定した値で累乗します。</p>
+      <pre><code>e^(2)</code></pre>
+      <p>指数関数を使う計算で使用します。</p>
+
+      <h3 id="function-trig">10.6 三角関数：sin / cos / tan</h3>
+      <p>角度に関する計算を行う関数です。</p>
+      <pre><code>sin(30)</code></pre>
+      <p>角度単位がDEGの場合、結果は次のようになります。</p>
+      <pre><code>0.5</code></pre>
+      <p>三角関数を使うときは、角度単位がDEGかRADかを確認してください。</p>
+
+      <h3 id="function-log">10.7 常用対数：log</h3>
+      <p><code>log</code> は、底10の対数です。</p>
+      <pre><code>log(100)</code></pre>
+      <p>結果：</p>
+      <pre><code>2</code></pre>
+
+      <h3 id="function-ln">10.8 自然対数：ln</h3>
+      <p><code>ln</code> は、底eの対数です。</p>
+      <pre><code>ln(e)</code></pre>
+      <p>結果：</p>
+      <pre><code>1</code></pre>
+
+      <h3 id="function-round">10.9 四捨五入：round</h3>
+      <p>小数を四捨五入します。</p>
+      <pre><code>round(12.6)</code></pre>
+      <p>結果：</p>
+      <pre><code>13</code></pre>
+      <pre><code>round(12.4)</code></pre>
+      <p>結果：</p>
+      <pre><code>12</code></pre>
+      <p>金額や個数など、小数を整数にまとめたい場合に使えます。</p>
+
+      <h3 id="function-floor">10.10 切り下げ：floor</h3>
+      <p>小数を切り下げます。</p>
+      <pre><code>floor(12.9)</code></pre>
+      <p>結果：</p>
+      <pre><code>12</code></pre>
+      <p>小数部分を常に下方向へ丸めたい場合に使います。</p>
+
+      <h3 id="function-ceil">10.11 切り上げ：ceil</h3>
+      <p>小数を切り上げます。</p>
+      <pre><code>ceil(12.1)</code></pre>
+      <p>結果：</p>
+      <pre><code>13</code></pre>
+      <p>必要数や箱数など、少しでも超えたら1つ多く数えたい計算に便利です。</p>
+
+      <h4>使用例：1箱に6個入る商品の必要箱数</h4>
+      <pre><code>ceil(必要数 ÷ 6)</code></pre>
+      <p>必要数が13個の場合：</p>
+      <pre><code>ceil(13 ÷ 6)</code></pre>
+      <p>結果：</p>
+      <pre><code>3</code></pre>
+
+      <h3 id="function-min">10.12 最小値：min</h3>
+      <p>複数の値の中から、最も小さい値を求めます。</p>
+      <pre><code>min(240 ÷ 2, 138, 15 × 10)</code></pre>
+      <p>結果：</p>
+      <pre><code>120</code></pre>
+
+      <h4>使用例：複数の見積もりから最安値を求める</h4>
+      <pre><code>min(見積A, 見積B, 見積C)</code></pre>
+
+      <h3 id="function-max">10.13 最大値：max</h3>
+      <p>複数の値の中から、最も大きい値を求めます。</p>
+      <pre><code>max(240 ÷ 2, 138, 15 × 10)</code></pre>
+      <p>結果：</p>
+      <pre><code>150</code></pre>
+
+      <h4>使用例：複数月の売上から最高額を求める</h4>
+      <pre><code>max(1月売上, 2月売上, 3月売上)</code></pre>
+
+      <h3 id="function-comma">10.14 カンマ：,</h3>
+      <p>カンマは、<code>min</code> や <code>max</code> などで複数の値を区切るために使います。</p>
+      <pre><code>max(100, 200, 300)</code></pre>
+      <p>カンマは桁区切りではなく、関数の引数を区切るための記号です。</p>
+
+      <p class="back-to-toc"><a href="#toc">目次へ戻る</a></p>
+    </section>
+
+    <section id="section-11">
+      <h2>11. 関数を使うときの注意点</h2>
+      <p>関数を使うときは、次の点に注意してください。</p>
+
+      <h3>11.1 括弧を閉じる</h3>
+      <p>関数では、括弧の中に計算したい値を入力します。</p>
+
+      <p>正しい例：</p>
+      <pre><code>√(9)</code></pre>
+      <pre><code>sin(30)</code></pre>
+
+      <p>不完全な例：</p>
+      <pre><code>√(</code></pre>
+      <pre><code>sin(30</code></pre>
+
+      <p>括弧が閉じていない場合、計算できません。</p>
+
+      <h3>11.2 min / maxには2つ以上の値が必要</h3>
+      <p><code>min</code> と <code>max</code> は、複数の値を比べるための関数です。</p>
+
+      <p>正しい例：</p>
+      <pre><code>max(100, 200)</code></pre>
+
+      <p>不完全な例：</p>
+      <pre><code>max(100)</code></pre>
+
+      <p>1つの値だけでは比較できないため、2つ以上の値を入力してください。</p>
+
+      <h3>11.3 カンマの位置に注意する</h3>
+      <p>カンマは、値と値の間に入力します。</p>
+
+      <p>正しい例：</p>
+      <pre><code>max(100, 200, 300)</code></pre>
+
+      <p>不完全な例：</p>
+      <pre><code>max(100, 200, )</code></pre>
+      <pre><code>max(,100)</code></pre>
+
+      <h3>11.4 計算できない値がある</h3>
+      <p><code>√(-1)</code>、<code>log(0)</code>、<code>ln(0)</code> など、関数によっては計算できない値があります。</p>
+      <p>このような場合は、入力内容を確認してください。</p>
+
+      <h3>11.5 三角関数では角度単位を確認する</h3>
+      <p><code>sin</code>、<code>cos</code>、<code>tan</code> を使うときは、角度単位がDEGかRADかを確認してください。</p>
+      <p>たとえば、DEGでは次のように計算されます。</p>
+      <pre><code>sin(30) = 0.5</code></pre>
+      <p>RADでは、同じ <code>30</code> でも意味が異なります。</p>
+
+      <p class="back-to-toc"><a href="#toc">目次へ戻る</a></p>
+    </section>
+
+    <section id="section-12">
+      <h2>12. まとめ</h2>
+      <p>CalcPadは、通常の電卓として使いながら、よく使う計算式や値を保存して再利用できる電卓アプリです。</p>
+      <ul>
+        <li>よく使う計算は、計算式として保存する</li>
+        <li>よく使う値は、プリセットとして登録する</li>
+        <li>計算結果や式は、COPY / PASTEで再利用する</li>
+        <li>過去にコピーした値は、HISTORYから呼び出す</li>
+        <li>PROでは、基本関数を使ってより柔軟な計算ができる</li>
+      </ul>
+      <p>毎回同じ計算を入力する手間を減らし、日常の計算をよりスムーズに行えます。</p>
+      <p class="back-to-toc"><a href="#toc">目次へ戻る</a></p>
+    </section>
+  </div>
+</body>
+</html>
