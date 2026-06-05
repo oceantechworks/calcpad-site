@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guide d’utilisation de CalcPad</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --accent: #0f766e;
+      --accent-soft: #e6fffa;
+      --code-bg: #f3f4f6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", sans-serif;
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    .page {
+      width: min(100%, 920px);
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    header,
+    nav,
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      line-height: 1.35;
+      margin-top: 0;
+      color: var(--text);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      font-size: 1.12rem;
+      margin-top: 24px;
+      margin-bottom: 8px;
+    }
+
+    h4 {
+      font-size: 1rem;
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    ul,
+    ol {
+      padding-left: 1.4em;
+      margin-top: 8px;
+      margin-bottom: 14px;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .lead {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .toc-list {
+      columns: 1;
+      list-style-position: inside;
+      padding-left: 0;
+    }
+
+    .toc-sublist {
+      list-style-position: inside;
+      margin-top: 6px;
+      margin-bottom: 0;
+      padding-left: 1.2em;
+      font-size: 0.95rem;
+    }
+
+    .note {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin: 14px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 18px;
+      overflow-wrap: anywhere;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f9fafb;
+      font-weight: 700;
+    }
+
+    td.numeric {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      background: var(--code-bg);
+      border-radius: 6px;
+      padding: 0.08em 0.35em;
+      font-size: 0.95em;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border-radius: 12px;
+      padding: 12px 14px;
+      overflow-x: auto;
+      margin: 10px 0 16px;
+      border: 1px solid var(--border);
+    }
+
+    pre code {
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+      font-size: 0.94em;
+      white-space: pre;
+    }
+
+    .back-to-toc {
+      margin-top: 22px;
+      margin-bottom: 0;
+      text-align: right;
+      font-size: 0.95rem;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 16px 12px 40px;
+      }
+
+      header,
+      nav,
+      section {
+        padding: 16px;
+        border-radius: 14px;
+      }
+
+      h1 {
+        font-size: 1.55rem;
+      }
+
+      h2 {
+        font-size: 1.22rem;
+      }
+
+      table {
+        font-size: 0.94rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header id="top">
+      <h1>Guide d’utilisation de CalcPad</h1>
+    </header>
+
+    <nav id="toc" aria-label="Table des matières">
+      <h2>Table des matières</h2>
+      <ol class="toc-list">
+        <li><a href="#section-1">Ce que vous pouvez faire avec CalcPad</a></li>
+        <li><a href="#section-2">Utiliser CalcPad comme une calculatrice classique</a></li>
+        <li><a href="#section-3">Créer une formule</a></li>
+        <li><a href="#section-4">Utiliser une formule enregistrée</a></li>
+        <li><a href="#section-5">Utiliser les préréglages</a></li>
+        <li><a href="#section-6">Utiliser COPY</a></li>
+        <li><a href="#section-7">Utiliser PASTE</a></li>
+        <li><a href="#section-8">Utiliser HISTORY</a></li>
+        <li><a href="#section-9">Utiliser les fonctions (fonction PRO)</a></li>
+        <li>
+          <a href="#section-10">Liste des fonctions et exemples</a>
+          <ol class="toc-sublist">
+            <li><a href="#function-sqrt">Racine carrée : √</a></li>
+            <li><a href="#function-abs">Valeur absolue : |x|</a></li>
+            <li><a href="#function-pi">Pi : π</a></li>
+            <li><a href="#function-e">Nombre d’Euler : e</a></li>
+            <li><a href="#function-exp">e puissance x : e^x</a></li>
+            <li><a href="#function-trig">Fonctions trigonométriques : sin / cos / tan</a></li>
+            <li><a href="#function-log">Logarithme décimal : log</a></li>
+            <li><a href="#function-ln">Logarithme naturel : ln</a></li>
+            <li><a href="#function-round">Arrondir : round</a></li>
+            <li><a href="#function-floor">Arrondir vers le bas : floor</a></li>
+            <li><a href="#function-ceil">Arrondir vers le haut : ceil</a></li>
+            <li><a href="#function-min-max">Minimum et maximum : min / max</a></li>
+            <li><a href="#function-min-max-examples">Exemples avec min / max</a></li>
+            <li><a href="#function-comma">Virgule : ,</a></li>
+          </ol>
+        </li>
+        <li><a href="#section-11">Points à vérifier lors de l’utilisation des fonctions</a></li>
+        <li><a href="#section-12">Résumé</a></li>
+      </ol>
+    </nav>
+
+    <section id="section-1">
+      <h2>1. Ce que vous pouvez faire avec CalcPad</h2>
+      <p>CalcPad vous permet principalement de faire les opérations suivantes :</p>
+      <ul>
+        <li>L’utiliser comme une calculatrice classique</li>
+        <li>Créer et enregistrer les formules que vous utilisez souvent</li>
+        <li>Rappeler une formule enregistrée et calculer en saisissant seulement les variables</li>
+        <li>Enregistrer les nombres que vous utilisez souvent comme préréglages</li>
+        <li>Copier les résultats de calcul et les expressions</li>
+        <li>Réutiliser des valeurs depuis l’historique de copie</li>
+        <li>Calculer avec des fonctions de base</li>
+      </ul>
+      <p class="back-to-toc"><a href="#toc">Retour à la table des matières</a></p>
+    </section>
+
+    <section id="section-2">
+      <h2>2. Utiliser CalcPad comme une calculatrice classique</h2>
+      <p>Sur l’écran principal de CalcPad, vous pouvez saisir des nombres et des opérateurs comme avec une calculatrice classique.</p>
+
+      <h3>Utilisation de base</h3>
+      <ol>
+        <li>Saisissez un nombre.</li>
+        <li>Saisissez un opérateur comme <code>+</code>, <code>−</code>, <code>×</code> ou <code>÷</code>.</li>
+        <li>Touchez <code>=</code> pour afficher le résultat.</li>
+      </ol>
+
+      <p>Les calculs restent affichés sous forme de journal. Vous pouvez donc continuer à calculer tout en vérifiant les opérations récentes.</p>
+      <p class="back-to-toc"><a href="#toc">Retour à la table des matières</a></p>
+    </section>
+
+    <section id="section-3">
+      <h2>3. Créer une formule</h2>
+      <p>L’une des principales fonctions de CalcPad est de créer et d’enregistrer les formules que vous utilisez souvent.</p>
+      <p>Par exemple, vous pouvez enregistrer des formules comme celles-ci :</p>
+
+      <pre><code>Prix unitaire × Quantité
+Taux horaire × Heures travaillées + Prime fixe
+Recettes − Dépenses
+Poids ÷ Taille ^ 2</code></pre>
+
+      <p>Après avoir enregistré une formule, vous pouvez la rappeler plus tard et calculer en saisissant seulement les valeurs nécessaires.</p>
+
+      <h3>Étapes de création d’une formule</h3>
+      <ol>
+        <li>Saisir les informations de base</li>
+        <li>Vérifier les réglages d’affichage du résultat</li>
+        <li>Définir les variables</li>
+        <li>Créer la formule</li>
+        <li>L’enregistrer</li>
+      </ol>
+
+      <h3>3.1 Saisir les informations de base</h3>
+      <p>Commencez par saisir le nom de la formule.</p>
+      <p>Choisissez un nom facile à reconnaître lorsque vous consulterez plus tard la liste des formules.</p>
+
+      <h3>3.2 Vérifier les réglages d’affichage du résultat</h3>
+      <p>Vous pouvez ajuster la façon dont le résultat du calcul est affiché.</p>
+      <ul>
+        <li>Libellé du résultat : le nom utilisé pour afficher le résultat. Si vous le laissez vide, il sera affiché comme « Résultat ».</li>
+        <li>Décimales : le nombre de décimales à afficher dans le résultat.</li>
+        <li>Arrondi : la méthode utilisée pour arrondir le résultat au nombre de décimales choisi (arrondir / arrondir vers le bas / arrondir vers le haut).</li>
+      </ul>
+      <p>Par exemple, vous pouvez masquer les décimales pour les calculs de prix, ou les afficher pour les calculs de ratios.</p>
+
+      <h3>3.3 Définir les variables</h3>
+      <p>Une variable est une valeur que vous saisissez à chaque exécution d’une formule.</p>
+      <p>Par exemple, dans la formule suivante, <code>Prix unitaire</code> et <code>Quantité</code> sont des variables.</p>
+
+      <pre><code>Prix unitaire × Quantité × 1,1</code></pre>
+
+      <p>Lorsque vous exécutez la formule, saisissez les valeurs de <code>Prix unitaire</code> et <code>Quantité</code>, puis CalcPad calcule le résultat.</p>
+
+      <h4>Ajouter une variable</h4>
+      <p>Lorsque vous ajoutez une variable, saisissez les informations suivantes :</p>
+      <ul>
+        <li>Type : nombre / pourcentage (%)</li>
+        <li>Nom de variable : le nom de la variable, par exemple Prix unitaire ou Quantité.</li>
+        <li>Valeur initiale : saisissez-la si vous voulez définir une valeur par défaut. Vous pouvez modifier cette valeur à chaque calcul.</li>
+        <li>Clé (a-z) : la lettre utilisée dans la formule à la place du nom de la variable.</li>
+      </ul>
+
+      <h3>3.4 Créer la formule</h3>
+      <p>Créez la formule proprement dite à l’aide des variables.</p>
+      <p>Exemple :</p>
+      <pre><code>a : Prix unitaire
+b : Quantité
+
+a × b × 1,1</code></pre>
+
+      <p>Grâce aux variables, vous pouvez répéter le même calcul en ne saisissant que les valeurs qui changent.</p>
+
+      <h3>3.5 Créer une formule avec des fonctions</h3>
+      <p>Avec PRO, vous pouvez aussi utiliser les fonctions de base dans vos formules.</p>
+
+      <pre><code>max(Ventes 1, Ventes 2, Ventes 3)</code></pre>
+      <pre><code>|Montant prévu - Montant réel|</code></pre>
+      <pre><code>round(Prix unitaire × Quantité)</code></pre>
+
+      <p>Les fonctions permettent de créer des formules incluant des valeurs maximales, des valeurs minimales, des écarts, des arrondis, et plus encore.</p>
+      <p>Lorsque vous utilisez des fonctions trigonométriques, vous pouvez définir l’unité d’angle (DEG / RAD). Cette unité d’angle s’applique uniquement à cette formule.</p>
+
+      <p class="back-to-toc"><a href="#toc">Retour à la table des matières</a></p>
+    </section>
+
+    <section id="section-4">
+      <h2>4. Utiliser une formule enregistrée</h2>
+      <p>Les formules enregistrées peuvent être sélectionnées et utilisées depuis la liste des formules.</p>
+
+      <h3>Comment utiliser une formule</h3>
+      <ol>
+        <li>Ouvrez la liste des formules avec le bouton <code>f(x)</code> du clavier de la calculatrice.</li>
+        <li>Sélectionnez la formule que vous voulez utiliser.</li>
+        <li>Saisissez les valeurs des variables affichées.</li>
+        <li>Lorsque toutes les valeurs nécessaires sont saisies, le résultat s’affiche.</li>
+      </ol>
+
+      <h3>Exemple : Prix unitaire × Quantité × 1,1</h3>
+      <p>Formule enregistrée :</p>
+      <pre><code>Prix unitaire × Quantité × 1,1</code></pre>
+
+      <p>Valeurs saisies lors de l’exécution :</p>
+      <pre><code>[Prix unitaire] = 1 200
+[Quantité] = 3</code></pre>
+
+      <p>Résultat :</p>
+      <pre><code>[Résultat] = 3 960</code></pre>
+
+      <p>Même si vous utilisez souvent la même formule, vous n’avez qu’à saisir les valeurs des variables à chaque fois.</p>
+      <p class="back-to-toc"><a href="#toc">Retour à la table des matières</a></p>
+    </section>
+
+    <section id="section-5">
+      <h2>5. Utiliser les préréglages</h2>
+      <p>Les préréglages vous permettent d’enregistrer les nombres que vous utilisez souvent.</p>
+      <p>Par exemple, enregistrer des taux de taxe, des frais, des prix unitaires courants ou des coûts fixes peut réduire la saisie manuelle.</p>
+
+      <h3>Exemples de préréglages</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Libellé</th>
+            <th>Valeur</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TVA 20%</td>
+            <td class="numeric">0,2</td>
+          </tr>
+          <tr>
+            <td>Frais</td>
+            <td class="numeric">330</td>
+          </tr>
+          <tr>
+            <td>Forfait de base</td>
+            <td class="numeric">980</td>
+          </tr>
+          <tr>
+            <td>Taux horaire</td>
+            <td class="numeric">1 500</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>5.1 Utiliser un préréglage</h3>
+      <ol>
+        <li>Touchez le bouton <code>PRE</code> du clavier de la calculatrice pour ouvrir la feuille des préréglages.</li>
+        <li>Touchez le préréglage que vous voulez saisir.</li>
+      </ol>
+
+      <h3>5.2 Ajouter, modifier ou supprimer des préréglages</h3>
+      <ul>
+        <li>Vous pouvez ajouter un préréglage avec le bouton <code>+</code> en haut à droite de la feuille des préréglages.</li>
+        <li>Vous pouvez modifier ou supprimer un préréglage depuis le menu à trois points situé à droite de chaque préréglage.</li>
+      </ul>
+
+      <p class="back-to-toc"><a href="#toc">Retour à la table des matières</a></p>
+    </section>
+
+    <section id="section-6">
+      <h2>6. Utiliser COPY</h2>
+      <p>CalcPad vous permet de copier les résultats de calcul et les lignes du journal.</p>
+
+      <h3>6.1 Copier le dernier résultat de calcul</h3>
+      <p>Touchez le bouton <code>COPY</code> pour copier le dernier résultat de calcul.</p>
+      <p>Par exemple, si le résultat suivant est affiché :</p>
+
+      <pre><code>1 200 × 5 × 80%
+= 4 800</code></pre>
+
+      <p>Touchez <code>COPY</code> pour copier <code>4 800</code>.</p>
+      <p>Vous pouvez ensuite coller la valeur copiée avec <code>PASTE</code> ou l’enregistrer comme préréglage.</p>
+
+      <h3>6.2 Sélectionner et copier une ligne du journal</h3>
+      <p>Appuyez longuement sur une ligne du journal affichée à l’écran pour la sélectionner.</p>
+      <p>Lorsqu’une ligne est sélectionnée, touchez <code>COPY</code> pour copier l’expression ou la valeur de cette ligne.</p>
+
+      <p>Par exemple, si ce journal est affiché :</p>
+      <pre><code>1 200 × 5 × 80%
+= 4 800</code></pre>
+
+      <p>Sélectionnez la ligne de l’expression pour copier l’expression, ou la ligne du résultat pour copier le résultat.</p>
+      <p class="back-to-toc"><a href="#toc">Retour à la table des matières</a></p>
+    </section>
+
+    <section id="section-7">
+      <h2>7. Utiliser PASTE</h2>
+      <p><code>PASTE</code> insère dans le champ de saisie la valeur ou l’expression copiée le plus récemment.</p>
+
+      <h3>Comment utiliser PASTE</h3>
+      <ol>
+        <li>Copiez une valeur ou une expression avec <code>COPY</code>.</li>
+        <li>Déplacez le curseur à l’endroit où vous voulez coller.</li>
+        <li>Touchez <code>PASTE</code>.</li>
+      </ol>
+
+      <p>C’est utile lorsque vous voulez réutiliser un résultat copié dans un autre calcul.</p>
+      <p class="back-to-toc"><a href="#toc">Retour à la table des matières</a></p>
+    </section>
+
+    <section id="section-8">
+      <h2>8. Utiliser HISTORY</h2>
+      <p>Appuyez longuement sur le bouton <code>PASTE</code> pour ouvrir la feuille de l’historique de copie.</p>
+      <p>L’historique de copie conserve les valeurs et expressions que vous avez copiées auparavant.</p>
+
+      <h3>Ce que vous pouvez faire avec HISTORY</h3>
+      <ul>
+        <li>Sélectionner un élément de l’historique et le coller</li>
+        <li>Enregistrer une valeur de l’historique comme préréglage</li>
+        <li>Copier un élément de l’historique vers le presse-papiers du système</li>
+        <li>Supprimer les éléments inutiles de l’historique</li>
+      </ul>
+
+      <p class="back-to-toc"><a href="#toc">Retour à la table des matières</a></p>
+    </section>
+
+    <section id="section-9">
+      <h2>9. Utiliser les fonctions (fonction PRO)</h2>
+      <p>Avec PRO, vous pouvez utiliser les fonctions et constantes de base.</p>
+      <p>Les fonctions peuvent être utilisées sur l’écran de calculatrice classique et dans l’éditeur de formules.</p>
+
+      <h3>Ouvrir le clavier de fonctions</h3>
+      <p>Sur l’écran de calculatrice classique, touchez le bouton <code>Func</code> en haut du clavier pour ouvrir le clavier de fonctions.</p>
+      <p>Le clavier de fonctions permet de saisir des racines carrées, des valeurs absolues, des fonctions trigonométriques, des logarithmes, des fonctions d’arrondi, des valeurs maximales, des valeurs minimales, et plus encore.</p>
+
+      <h3>9.1 Unités d’angle</h3>
+      <p>Les fonctions trigonométriques comme <code>sin</code>, <code>cos</code> et <code>tan</code> utilisent une unité d’angle.</p>
+      <p>CalcPad prend en charge les unités d’angle suivantes :</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Affichage</th>
+            <th>Signification</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>DEG</td>
+            <td>Degrés</td>
+          </tr>
+          <tr>
+            <td>RAD</td>
+            <td>Radians</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>L’unité d’angle sélectionnée sur l’écran de calculatrice classique est enregistrée comme réglage de la calculatrice classique.</p>
+      <p>Dans l’éditeur de formules, l’unité d’angle est enregistrée pour chaque formule. Ainsi, modifier l’unité d’angle de la calculatrice classique ne change pas les résultats des formules enregistrées.</p>
+
+      <h3>9.2 Fermer le panneau de fonctions après saisie</h3>
+      <p>Le clavier de fonctions dispose d’un réglage permettant de se fermer automatiquement après la saisie.</p>
+      <p>Lorsque ce réglage est désactivé, le clavier de fonctions reste ouvert après la saisie d’une fonction. Lorsqu’il est activé, le clavier se ferme après la saisie d’une fonction.</p>
+      <p>Si vous voulez saisir plusieurs fonctions à la suite, il est pratique de garder ce réglage désactivé.</p>
+
+      <p class="back-to-toc"><a href="#toc">Retour à la table des matières</a></p>
+    </section>
+
+    <section id="section-10">
+      <h2>10. Liste des fonctions et exemples</h2>
+      <p>Cette section présente les principales fonctions et constantes disponibles dans CalcPad.</p>
+
+      <h3 id="function-sqrt">10.1 Racine carrée : √</h3>
+      <p>Calcule la racine carrée d’une valeur.</p>
+      <pre><code>√(9)</code></pre>
+      <p>Résultat :</p>
+      <pre><code>3</code></pre>
+      <p>C’est utile, par exemple, pour trouver la longueur du côté d’un carré à partir de son aire.</p>
+
+      <h3 id="function-abs">10.2 Valeur absolue : |x|</h3>
+      <p>La valeur absolue traite un nombre comme une valeur toujours positive ou nulle.</p>
+      <pre><code>|1200 - 1500|</code></pre>
+      <p>Résultat :</p>
+      <pre><code>300</code></pre>
+      <p>C’est utile lorsque vous voulez afficher une différence ou une erreur sous forme de valeur positive.</p>
+
+      <h4>Exemple : trouver l’écart entre un montant prévu et un montant réel</h4>
+      <pre><code>|Montant prévu - Montant réel|</code></pre>
+      <p>Vous obtenez uniquement l’ampleur de l’écart, que le montant réel soit plus élevé ou plus faible.</p>
+
+      <h3 id="function-pi">10.3 Pi : π</h3>
+      <p>Saisit pi.</p>
+      <pre><code>π</code></pre>
+      <p>C’est utile pour les calculs liés aux cercles.</p>
+
+      <h4>Exemple : aire d’un cercle de rayon 5</h4>
+      <pre><code>π × 5 ^ 2</code></pre>
+
+      <h3 id="function-e">10.4 Nombre d’Euler : e</h3>
+      <p>Saisit le nombre d’Euler.</p>
+      <pre><code>e</code></pre>
+      <p>Il est utilisé pour les calculs exponentiels et les logarithmes naturels.</p>
+
+      <h3 id="function-exp">10.5 e puissance x : e^x</h3>
+      <p>Élève <code>e</code> à la puissance indiquée.</p>
+      <pre><code>e^(2)</code></pre>
+      <p>C’est utilisé dans les calculs avec des fonctions exponentielles.</p>
+
+      <h3 id="function-trig">10.6 Fonctions trigonométriques : sin / cos / tan</h3>
+      <p>Ces fonctions servent aux calculs liés aux angles.</p>
+      <pre><code>sin(30)</code></pre>
+      <p>Lorsque l’unité d’angle est DEG, le résultat est :</p>
+      <pre><code>0,5</code></pre>
+      <p>Lorsque vous utilisez des fonctions trigonométriques, vérifiez que l’unité d’angle est bien réglée sur DEG ou RAD selon votre intention.</p>
+
+      <h3 id="function-log">10.7 Logarithme décimal : log</h3>
+      <p><code>log</code> est le logarithme en base 10.</p>
+      <pre><code>log(100)</code></pre>
+      <p>Résultat :</p>
+      <pre><code>2</code></pre>
+
+      <h3 id="function-ln">10.8 Logarithme naturel : ln</h3>
+      <p><code>ln</code> est le logarithme en base e.</p>
+      <pre><code>ln(e)</code></pre>
+      <p>Résultat :</p>
+      <pre><code>1</code></pre>
+
+      <h3 id="function-round">10.9 Arrondir : round</h3>
+      <p>Arrondit une valeur décimale à l’entier le plus proche.</p>
+      <pre><code>round(12,6)</code></pre>
+      <p>Résultat :</p>
+      <pre><code>13</code></pre>
+      <pre><code>round(12,4)</code></pre>
+      <p>Résultat :</p>
+      <pre><code>12</code></pre>
+      <p>C’est utile lorsque vous voulez convertir des décimales en nombres entiers pour des montants, des quantités ou des calculs similaires.</p>
+
+      <h3 id="function-floor">10.10 Arrondir vers le bas : floor</h3>
+      <p>Arrondit une valeur décimale vers le bas.</p>
+      <pre><code>floor(12,9)</code></pre>
+      <p>Résultat :</p>
+      <pre><code>12</code></pre>
+      <p>Utilisez cette fonction lorsque vous voulez toujours arrondir la partie décimale vers le bas.</p>
+
+      <h3 id="function-ceil">10.11 Arrondir vers le haut : ceil</h3>
+      <p>Arrondit une valeur décimale vers le haut.</p>
+      <pre><code>ceil(12,1)</code></pre>
+      <p>Résultat :</p>
+      <pre><code>13</code></pre>
+      <p>C’est utile pour les calculs comme le nombre de boîtes ou de lots nécessaires, où tout reste signifie qu’il faut en prévoir un de plus.</p>
+
+      <h4>Exemple : nombre de boîtes nécessaires lorsqu’une boîte contient 6 articles</h4>
+      <pre><code>ceil(Quantité nécessaire ÷ 6)</code></pre>
+      <p>Si la quantité nécessaire est 13 :</p>
+      <pre><code>ceil(13 ÷ 6)</code></pre>
+      <p>Résultat :</p>
+      <pre><code>3</code></pre>
+
+      <h3 id="function-min-max">10.12 Minimum et maximum : min / max</h3>
+      <p><code>min</code> renvoie la plus petite valeur parmi plusieurs valeurs, et <code>max</code> renvoie la plus grande valeur.</p>
+
+      <pre><code>min(240 ÷ 2, 138, 15 × 10)</code></pre>
+      <p>Résultat :</p>
+      <pre><code>120</code></pre>
+
+      <pre><code>max(240 ÷ 2, 138, 15 × 10)</code></pre>
+      <p>Résultat :</p>
+      <pre><code>150</code></pre>
+
+      <p><code>min</code> et <code>max</code> ne servent pas seulement à trouver la plus petite ou la plus grande valeur. Ils sont aussi utiles lorsque vous voulez définir une limite supérieure ou inférieure dans une formule.</p>
+
+      <h3 id="function-min-max-examples">10.13 Exemples avec min / max</h3>
+      <p>Avec <code>min</code> et <code>max</code>, vous pouvez créer des formules qui empêchent une valeur de dépasser un certain montant, de descendre sous un certain montant, ou qui calculent seulement la partie au-dessus d’un seuil.</p>
+
+      <h4>Exemple : ajouter uniquement la partie au-dessus d’un seuil</h4>
+      <p>Vous pouvez utiliser <code>max</code> pour calculer uniquement la partie qui dépasse une certaine valeur.</p>
+
+      <p>Exemple : calcul d’une rémunération de livraison</p>
+      <ul>
+        <li>La rémunération de base est 3 600</li>
+        <li>Jusqu’à 10 km, seule la rémunération de base est versée</li>
+        <li>Pour la distance au-delà de 10 km, ajouter 100 par km</li>
+      </ul>
+
+      <pre><code>3600 + 100 × max(0, Distance - 10)</code></pre>
+
+      <p>Avec <code>max(0, Distance - 10)</code>, le supplément est de 0 lorsque la distance est de 10 km ou moins. Seule la distance au-delà de 10 km est ajoutée.</p>
+
+      <h4>Exemple : définir une limite supérieure</h4>
+      <p>Vous pouvez utiliser <code>min</code> pour empêcher une valeur calculée de dépasser un certain montant.</p>
+
+      <p>Exemple : plafonner à 1 000 une remise de 20%</p>
+
+      <pre><code>min(Prix × 20%, 1000)</code></pre>
+
+      <p>Cette formule calcule une remise de 20% à partir du prix, mais si le montant de la remise dépasse 1 000, il est limité à 1 000.</p>
+
+      <p>Ainsi, <code>min</code> / <code>max</code> vous aide à créer facilement des calculs conditionnels simples.</p>
+
+      <h3 id="function-comma">10.14 Virgule : ,</h3>
+      <p>La virgule sert à séparer plusieurs valeurs dans des fonctions comme <code>min</code> et <code>max</code>.</p>
+      <pre><code>max(100, 200, 300)</code></pre>
+      <p>Cette virgule n’est pas un séparateur de milliers. Elle sert à séparer les arguments d’une fonction.</p>
+
+      <p class="back-to-toc"><a href="#toc">Retour à la table des matières</a></p>
+    </section>
+
+    <section id="section-11">
+      <h2>11. Points à vérifier lors de l’utilisation des fonctions</h2>
+      <p>Gardez les points suivants à l’esprit lorsque vous utilisez les fonctions.</p>
+
+      <h3>11.1 Fermer les parenthèses</h3>
+      <p>Les fonctions exigent que la valeur à calculer soit placée entre parenthèses.</p>
+
+      <p>Exemples corrects :</p>
+      <pre><code>√(9)</code></pre>
+      <pre><code>sin(30)</code></pre>
+
+      <p>Exemples incomplets :</p>
+      <pre><code>√(</code></pre>
+      <pre><code>sin(30</code></pre>
+
+      <p>Si les parenthèses ne sont pas fermées, l’expression ne peut pas être calculée.</p>
+
+      <h3>11.2 min / max nécessitent au moins deux valeurs</h3>
+      <p><code>min</code> et <code>max</code> comparent plusieurs valeurs.</p>
+
+      <p>Exemple correct :</p>
+      <pre><code>max(100, 200)</code></pre>
+
+      <p>Exemple incomplet :</p>
+      <pre><code>max(100)</code></pre>
+
+      <p>Avec une seule valeur, il n’y a rien à comparer. Saisissez donc deux valeurs ou plus.</p>
+
+      <h3>11.3 Placer les virgules correctement</h3>
+      <p>Les virgules doivent être placées entre les valeurs.</p>
+
+      <p>Exemple correct :</p>
+      <pre><code>max(100, 200, 300)</code></pre>
+
+      <p>Exemples incomplets :</p>
+      <pre><code>max(100, 200, )</code></pre>
+      <pre><code>max(,100)</code></pre>
+
+      <h3>11.4 Certaines valeurs ne peuvent pas être calculées</h3>
+      <p>Certaines fonctions ne peuvent pas calculer certaines valeurs, par exemple <code>√(-1)</code>, <code>log(0)</code> ou <code>ln(0)</code>.</p>
+      <p>Dans ce cas, vérifiez l’expression saisie.</p>
+
+      <h3>11.5 Vérifier l’unité d’angle pour les fonctions trigonométriques</h3>
+      <p>Lorsque vous utilisez <code>sin</code>, <code>cos</code> ou <code>tan</code>, vérifiez que l’unité d’angle est réglée sur DEG ou RAD selon votre intention.</p>
+      <p>Par exemple, en DEG :</p>
+      <pre><code>sin(30) = 0,5</code></pre>
+      <p>En RAD, la même valeur <code>30</code> a une signification différente.</p>
+
+      <p class="back-to-toc"><a href="#toc">Retour à la table des matières</a></p>
+    </section>
+
+    <section id="section-12">
+      <h2>12. Résumé</h2>
+      <p>CalcPad est une application de calculatrice qui vous permet d’utiliser une calculatrice classique tout en enregistrant et en réutilisant les formules et valeurs que vous utilisez souvent.</p>
+      <ul>
+        <li>Enregistrez les calculs fréquents sous forme de formules</li>
+        <li>Enregistrez les valeurs fréquentes comme préréglages</li>
+        <li>Réutilisez les résultats et expressions avec COPY / PASTE</li>
+        <li>Retrouvez les valeurs déjà copiées depuis HISTORY</li>
+        <li>Utilisez les fonctions de base avec PRO pour des calculs plus flexibles</li>
+      </ul>
+      <p>CalcPad réduit les saisies répétées et rend les calculs du quotidien plus fluides.</p>
+      <p class="back-to-toc"><a href="#toc">Retour à la table des matières</a></p>
+    </section>
+  </div>
+</body>
+</html>
