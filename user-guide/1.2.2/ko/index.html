@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CalcPad 사용 가이드</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --accent: #0f766e;
+      --accent-soft: #e6fffa;
+      --code-bg: #f3f4f6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Noto Sans", sans-serif;
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    .page {
+      width: min(100%, 920px);
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    header,
+    nav,
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      line-height: 1.35;
+      margin-top: 0;
+      color: var(--text);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      font-size: 1.12rem;
+      margin-top: 24px;
+      margin-bottom: 8px;
+    }
+
+    h4 {
+      font-size: 1rem;
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    ul,
+    ol {
+      padding-left: 1.4em;
+      margin-top: 8px;
+      margin-bottom: 14px;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .lead {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .toc-list {
+      columns: 1;
+      list-style-position: inside;
+      padding-left: 0;
+    }
+
+    .toc-sublist {
+      list-style-position: inside;
+      margin-top: 6px;
+      margin-bottom: 0;
+      padding-left: 1.2em;
+      font-size: 0.95rem;
+    }
+
+    .note {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin: 14px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 18px;
+      overflow-wrap: anywhere;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f9fafb;
+      font-weight: 700;
+    }
+
+    td.numeric {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      background: var(--code-bg);
+      border-radius: 6px;
+      padding: 0.08em 0.35em;
+      font-size: 0.95em;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border-radius: 12px;
+      padding: 12px 14px;
+      overflow-x: auto;
+      margin: 10px 0 16px;
+      border: 1px solid var(--border);
+    }
+
+    pre code {
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+      font-size: 0.94em;
+      white-space: pre;
+    }
+
+    .back-to-toc {
+      margin-top: 22px;
+      margin-bottom: 0;
+      text-align: right;
+      font-size: 0.95rem;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 16px 12px 40px;
+      }
+
+      header,
+      nav,
+      section {
+        padding: 16px;
+        border-radius: 14px;
+      }
+
+      h1 {
+        font-size: 1.55rem;
+      }
+
+      h2 {
+        font-size: 1.22rem;
+      }
+
+      table {
+        font-size: 0.94rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header id="top">
+      <h1>CalcPad 사용 가이드</h1>
+    </header>
+
+    <nav id="toc" aria-label="목차">
+      <h2>목차</h2>
+      <ol class="toc-list">
+        <li><a href="#section-1">CalcPad로 할 수 있는 일</a></li>
+        <li><a href="#section-2">일반 계산기로 사용하기</a></li>
+        <li><a href="#section-3">계산식 만들기</a></li>
+        <li><a href="#section-4">저장한 계산식 사용하기</a></li>
+        <li><a href="#section-5">프리셋 사용하기</a></li>
+        <li><a href="#section-6">COPY 사용하기</a></li>
+        <li><a href="#section-7">PASTE 사용하기</a></li>
+        <li><a href="#section-8">HISTORY(복사 기록) 사용하기</a></li>
+        <li><a href="#section-9">함수 사용하기(PRO 기능)</a></li>
+        <li>
+          <a href="#section-10">함수 목록과 사용 예</a>
+          <ol class="toc-sublist">
+            <li><a href="#function-sqrt">제곱근: √</a></li>
+            <li><a href="#function-abs">절댓값: |x|</a></li>
+            <li><a href="#function-pi">원주율: π</a></li>
+            <li><a href="#function-e">오일러 수: e</a></li>
+            <li><a href="#function-exp">e의 x제곱: e^x</a></li>
+            <li><a href="#function-trig">삼각 함수: sin / cos / tan</a></li>
+            <li><a href="#function-log">상용로그: log</a></li>
+            <li><a href="#function-ln">자연로그: ln</a></li>
+            <li><a href="#function-round">반올림: round</a></li>
+            <li><a href="#function-floor">내림: floor</a></li>
+            <li><a href="#function-ceil">올림: ceil</a></li>
+            <li><a href="#function-min-max">최솟값・최댓값: min / max</a></li>
+            <li><a href="#function-min-max-examples">min / max 응용 예</a></li>
+            <li><a href="#function-comma">쉼표: ,</a></li>
+          </ol>
+        </li>
+        <li><a href="#section-11">함수를 사용할 때의 주의점</a></li>
+        <li><a href="#section-12">정리</a></li>
+      </ol>
+    </nav>
+
+    <section id="section-1">
+      <h2>1. CalcPad로 할 수 있는 일</h2>
+      <p>CalcPad에서는 주로 다음 작업을 할 수 있습니다.</p>
+      <ul>
+        <li>일반 계산기처럼 계산하기</li>
+        <li>자주 사용하는 계산식을 만들고 저장하기</li>
+        <li>저장한 계산식을 불러와 변수만 입력해서 계산하기</li>
+        <li>자주 사용하는 숫자를 프리셋으로 등록하기</li>
+        <li>계산 결과나 식을 복사하기</li>
+        <li>복사 기록에서 이전에 복사한 값을 다시 사용하기</li>
+        <li>기본 함수를 사용해 계산하기</li>
+      </ul>
+      <p class="back-to-toc"><a href="#toc">목차로 돌아가기</a></p>
+    </section>
+
+    <section id="section-2">
+      <h2>2. 일반 계산기로 사용하기</h2>
+      <p>CalcPad의 메인 화면에서는 일반 계산기처럼 숫자와 연산자를 입력해 계산할 수 있습니다.</p>
+
+      <h3>기본 조작</h3>
+      <ol>
+        <li>숫자를 입력합니다.</li>
+        <li><code>+</code>, <code>−</code>, <code>×</code>, <code>÷</code> 등의 연산자를 입력합니다.</li>
+        <li><code>=</code> 를 탭하면 계산 결과가 표시됩니다.</li>
+      </ol>
+
+      <p>계산 결과는 화면에 로그로 남기 때문에, 직전 계산 내용을 확인하면서 계속 계산할 수 있습니다.</p>
+      <p class="back-to-toc"><a href="#toc">목차로 돌아가기</a></p>
+    </section>
+
+    <section id="section-3">
+      <h2>3. 계산식 만들기</h2>
+      <p>CalcPad의 핵심 기능은 자주 사용하는 계산식을 만들어 저장할 수 있다는 점입니다.</p>
+      <p>예를 들어 다음과 같은 계산식을 등록할 수 있습니다.</p>
+
+      <pre><code>단가 × 수량
+시급 × 작업 시간 + 기본급
+매출 − 비용
+체중 ÷ 키 ^ 2</code></pre>
+
+      <p>저장한 계산식은 나중에 불러와 필요한 값만 입력해서 계산할 수 있습니다.</p>
+
+      <h3>계산식 작성 흐름</h3>
+      <ol>
+        <li>기본 정보를 입력합니다</li>
+        <li>결과 표시 설정을 확인합니다</li>
+        <li>변수를 정의합니다</li>
+        <li>계산식을 만듭니다</li>
+        <li>저장합니다</li>
+      </ol>
+
+      <h3>3.1 기본 정보 입력하기</h3>
+      <p>먼저 계산식의 이름을 입력합니다.</p>
+      <p>나중에 계산식 목록에서 봤을 때 알아보기 쉬운 이름으로 정해 두면 편리합니다.</p>
+
+      <h3>3.2 결과 표시 설정 확인하기</h3>
+      <p>계산 결과가 표시되는 방식을 설정할 수 있습니다.</p>
+      <ul>
+        <li>결과 이름: 계산 결과를 어떤 이름으로 표시할지 정합니다. 비워 두면 “결과”로 표시됩니다.</li>
+        <li>소수 자릿수: 계산 결과에 표시할 소수점 이하 자릿수입니다.</li>
+        <li>반올림 방식: 지정한 소수 자릿수로 맞출 때의 처리 방식입니다(반올림 / 내림 / 올림).</li>
+      </ul>
+      <p>금액 계산에서는 소수점 이하를 표시하지 않고, 비율 계산에서는 소수점 이하를 표시하는 식으로 계산식마다 알맞게 조정할 수 있습니다.</p>
+
+      <h3>3.3 변수 정의하기</h3>
+      <p>변수란 계산할 때마다 입력하는 값을 말합니다.</p>
+      <p>예를 들어 다음 계산식에서는 <code>단가</code>와 <code>수량</code>이 변수입니다.</p>
+
+      <pre><code>단가 × 수량 × 1.1</code></pre>
+
+      <p>계산식을 실행할 때 <code>단가</code>와 <code>수량</code>의 값을 입력하면 CalcPad가 결과를 계산합니다.</p>
+
+      <h4>변수 추가</h4>
+      <p>변수를 추가할 때는 다음 정보를 입력합니다.</p>
+      <ul>
+        <li>타입: 숫자 / 퍼센트(%)</li>
+        <li>변수 이름: 변수의 이름입니다(예: 단가, 수량 등).</li>
+        <li>초기값: 변수에 미리 값을 넣어 두고 싶을 때 입력합니다. 이 값은 계산할 때마다 변경할 수 있습니다.</li>
+        <li>키(a-z): 계산식을 만들 때 변수 이름 대신 사용하는 알파벳입니다.</li>
+      </ul>
+
+      <h3>3.4 계산식 만들기</h3>
+      <p>변수를 사용해 실제 계산식을 만듭니다.</p>
+      <p>예:</p>
+      <pre><code>a: 단가
+b: 수량
+
+a × b × 1.1</code></pre>
+
+      <p>변수를 사용하면 매번 바뀌는 값만 입력하여 같은 계산을 반복할 수 있습니다.</p>
+
+      <h3>3.5 함수가 포함된 계산식 만들기</h3>
+      <p>PRO에서는 계산식 안에서도 기본 함수를 사용할 수 있습니다.</p>
+
+      <pre><code>max(매출1, 매출2, 매출3)</code></pre>
+      <pre><code>|예정 금액 - 실제 금액|</code></pre>
+      <pre><code>round(단가 × 수량)</code></pre>
+
+      <p>함수를 사용하면 최댓값, 최솟값, 차이, 반올림 처리 등을 포함한 계산식을 만들 수 있습니다.</p>
+      <p>삼각 함수를 사용하는 계산식에서는 각도 단위(DEG / RAD)를 설정할 수 있습니다. 이 각도 단위는 해당 계산식에만 적용됩니다.</p>
+
+      <p class="back-to-toc"><a href="#toc">목차로 돌아가기</a></p>
+    </section>
+
+    <section id="section-4">
+      <h2>4. 저장한 계산식 사용하기</h2>
+      <p>저장한 계산식은 계산식 목록에서 불러와 사용할 수 있습니다.</p>
+
+      <h3>사용 방법</h3>
+      <ol>
+        <li>계산기 키패드의 <code>f(x)</code> 버튼으로 계산식 목록을 엽니다.</li>
+        <li>사용할 계산식을 선택합니다.</li>
+        <li>표시된 변수에 값을 입력합니다.</li>
+        <li>필요한 값을 모두 입력하면 계산 결과가 표시됩니다.</li>
+      </ol>
+
+      <h3>예: 단가 × 수량 × 1.1</h3>
+      <p>등록한 계산식:</p>
+      <pre><code>단가 × 수량 × 1.1</code></pre>
+
+      <p>실행할 때 입력하는 값:</p>
+      <pre><code>[단가] = 1200
+[수량] = 3</code></pre>
+
+      <p>결과:</p>
+      <pre><code>[결과] = 3960</code></pre>
+
+      <p>같은 계산식을 여러 번 사용할 때도 매번 입력하는 것은 변수의 값뿐입니다.</p>
+      <p class="back-to-toc"><a href="#toc">목차로 돌아가기</a></p>
+    </section>
+
+    <section id="section-5">
+      <h2>5. 프리셋 사용하기</h2>
+      <p>프리셋은 자주 사용하는 숫자를 등록해 둘 수 있는 기능입니다.</p>
+      <p>예를 들어 세율, 수수료, 자주 쓰는 단가, 고정비 등을 등록해 두면 입력 시간을 줄일 수 있습니다.</p>
+
+      <h3>프리셋 예</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>라벨</th>
+            <th>값</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>소비세 10%</td>
+            <td class="numeric">0.1</td>
+          </tr>
+          <tr>
+            <td>수수료</td>
+            <td class="numeric">330</td>
+          </tr>
+          <tr>
+            <td>기본 요금</td>
+            <td class="numeric">980</td>
+          </tr>
+          <tr>
+            <td>시급</td>
+            <td class="numeric">1500</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>5.1 프리셋 사용하기</h3>
+      <ol>
+        <li>계산기 키패드의 <code>PRE</code> 버튼을 탭해 프리셋 시트를 엽니다.</li>
+        <li>입력할 프리셋을 탭합니다.</li>
+      </ol>
+
+      <h3>5.2 프리셋 추가 / 편집 / 삭제</h3>
+      <ul>
+        <li>프리셋 시트 오른쪽 위의 <code>+</code> 버튼으로 추가할 수 있습니다.</li>
+        <li>각 프리셋 오른쪽의 점 세 개 메뉴에서 편집 / 삭제를 할 수 있습니다.</li>
+      </ul>
+
+      <p class="back-to-toc"><a href="#toc">목차로 돌아가기</a></p>
+    </section>
+
+    <section id="section-6">
+      <h2>6. COPY 사용하기</h2>
+      <p>CalcPad에서는 계산 결과나 로그 내용을 복사할 수 있습니다.</p>
+
+      <h3>6.1 직전 계산 결과 복사하기</h3>
+      <p><code>COPY</code> 버튼을 탭하면 직전 계산 결과를 복사할 수 있습니다.</p>
+      <p>예를 들어 다음과 같은 결과가 표시되어 있을 때:</p>
+
+      <pre><code>1200 × 5 × 80%
+= 4800</code></pre>
+
+      <p><code>COPY</code> 를 탭하면 <code>4800</code> 을 복사할 수 있습니다.</p>
+      <p>복사한 값은 나중에 <code>PASTE</code> 로 붙여넣거나 프리셋으로 등록할 수 있습니다.</p>
+
+      <h3>6.2 로그 행을 선택해 복사하기</h3>
+      <p>디스플레이의 로그 행(계산 기록 행)을 길게 누르면 해당 행을 선택할 수 있습니다.</p>
+      <p>선택한 상태에서 <code>COPY</code> 를 탭하면 그 행의 식이나 값을 복사할 수 있습니다.</p>
+
+      <p>예를 들어 다음과 같은 로그가 있을 때:</p>
+      <pre><code>1200 × 5 × 80%
+= 4800</code></pre>
+
+      <p>식이 있는 행을 선택하면 식을 복사할 수 있고, 결과 행을 선택하면 결과를 복사할 수 있습니다.</p>
+      <p class="back-to-toc"><a href="#toc">목차로 돌아가기</a></p>
+    </section>
+
+    <section id="section-7">
+      <h2>7. PASTE 사용하기</h2>
+      <p><code>PASTE</code> 는 직전에 복사한 값이나 식을 입력란에 붙여넣는 기능입니다.</p>
+
+      <h3>사용 방법</h3>
+      <ol>
+        <li><code>COPY</code> 로 값이나 식을 복사합니다.</li>
+        <li>붙여넣고 싶은 위치로 커서를 이동합니다.</li>
+        <li><code>PASTE</code> 를 탭합니다.</li>
+      </ol>
+
+      <p>복사한 결과를 다른 계산에 이어서 사용하고 싶을 때 편리합니다.</p>
+      <p class="back-to-toc"><a href="#toc">목차로 돌아가기</a></p>
+    </section>
+
+    <section id="section-8">
+      <h2>8. HISTORY(복사 기록) 사용하기</h2>
+      <p><code>PASTE</code> 버튼을 길게 누르면 복사 기록 시트를 열 수 있습니다.</p>
+      <p>복사 기록에는 이전에 복사한 값이나 식이 저장됩니다.</p>
+
+      <h3>HISTORY에서 할 수 있는 일</h3>
+      <ul>
+        <li>기록에서 선택해 붙여넣기</li>
+        <li>기록의 값을 프리셋으로 등록하기</li>
+        <li>기록 내용을 OS 클립보드에 복사하기</li>
+        <li>필요 없는 기록 삭제하기</li>
+      </ul>
+
+      <p class="back-to-toc"><a href="#toc">목차로 돌아가기</a></p>
+    </section>
+
+    <section id="section-9">
+      <h2>9. 함수 사용하기(PRO 기능)</h2>
+      <p>PRO에서는 기본 함수와 상수를 사용할 수 있습니다.</p>
+      <p>함수는 일반 계산기 화면과 계산식 작성 화면에서 사용할 수 있습니다.</p>
+
+      <h3>함수 키패드 열기</h3>
+      <p>일반 계산기 화면에서는 키패드 상단의 <code>Func</code> 버튼으로 함수 키패드를 열 수 있습니다.</p>
+      <p>함수 키패드에서는 제곱근, 절댓값, 삼각 함수, 로그, 반올림, 최댓값, 최솟값 등을 입력할 수 있습니다.</p>
+
+      <h3>9.1 각도 단위</h3>
+      <p><code>sin</code>, <code>cos</code>, <code>tan</code> 등의 삼각 함수에서는 각도 단위를 사용합니다.</p>
+      <p>CalcPad에서는 다음 각도 단위를 선택할 수 있습니다.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>표시</th>
+            <th>의미</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>DEG</td>
+            <td>도 단위</td>
+          </tr>
+          <tr>
+            <td>RAD</td>
+            <td>라디안</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>일반 계산기 화면에서 선택한 각도 단위는 일반 계산기용 설정으로 저장됩니다.</p>
+      <p>계산식 작성 화면에서는 각도 단위가 계산식마다 저장됩니다. 따라서 일반 계산기의 각도 단위를 변경해도 저장된 계산식의 결과는 바뀌지 않습니다.</p>
+
+      <h3>9.2 입력 후 함수 패널 닫기</h3>
+      <p>함수 키패드에는 입력 후 자동으로 닫는 설정이 있습니다.</p>
+      <p>OFF일 때는 함수를 입력해도 함수 키패드가 열린 상태로 유지됩니다. ON일 때는 함수를 입력한 뒤 함수 키패드가 닫힙니다.</p>
+      <p>여러 함수를 연속해서 입력하고 싶다면 OFF로 두고 사용하는 것이 편리합니다.</p>
+
+      <p class="back-to-toc"><a href="#toc">목차로 돌아가기</a></p>
+    </section>
+
+    <section id="section-10">
+      <h2>10. 함수 목록과 사용 예</h2>
+      <p>이 섹션에서는 CalcPad에서 사용할 수 있는 주요 함수와 상수를 소개합니다.</p>
+
+      <h3 id="function-sqrt">10.1 제곱근: √</h3>
+      <p>제곱근을 구하는 함수입니다.</p>
+      <pre><code>√(9)</code></pre>
+      <p>결과:</p>
+      <pre><code>3</code></pre>
+      <p>면적에서 정사각형 한 변의 길이를 구하는 계산 등에 사용할 수 있습니다.</p>
+
+      <h3 id="function-abs">10.2 절댓값: |x|</h3>
+      <p>절댓값은 값을 항상 0 이상인 수로 다루기 위한 함수입니다.</p>
+      <pre><code>|1200 - 1500|</code></pre>
+      <p>결과:</p>
+      <pre><code>300</code></pre>
+      <p>차이나 오차를 양수로 보고 싶을 때 편리합니다.</p>
+
+      <h4>사용 예: 예정 금액과 실제 금액의 차이 보기</h4>
+      <pre><code>|예정 금액 - 실제 금액|</code></pre>
+      <p>예정보다 많거나 적은지와 관계없이 차이의 크기만 구할 수 있습니다.</p>
+
+      <h3 id="function-pi">10.3 원주율: π</h3>
+      <p>원주율을 입력할 수 있습니다.</p>
+      <pre><code>π</code></pre>
+      <p>원의 계산 등에 사용할 수 있습니다.</p>
+
+      <h4>사용 예: 반지름 5인 원의 넓이</h4>
+      <pre><code>π × 5 ^ 2</code></pre>
+
+      <h3 id="function-e">10.4 오일러 수: e</h3>
+      <p>오일러 수를 입력할 수 있습니다.</p>
+      <pre><code>e</code></pre>
+      <p>지수 계산이나 자연로그 계산에서 사용합니다.</p>
+
+      <h3 id="function-exp">10.5 e의 x제곱: e^x</h3>
+      <p><code>e</code> 를 지정한 값만큼 거듭제곱합니다.</p>
+      <pre><code>e^(2)</code></pre>
+      <p>지수 함수를 사용하는 계산에 사용합니다.</p>
+
+      <h3 id="function-trig">10.6 삼각 함수: sin / cos / tan</h3>
+      <p>각도와 관련된 계산을 하는 함수입니다.</p>
+      <pre><code>sin(30)</code></pre>
+      <p>각도 단위가 DEG일 때 결과는 다음과 같습니다.</p>
+      <pre><code>0.5</code></pre>
+      <p>삼각 함수를 사용할 때는 각도 단위가 DEG인지 RAD인지 확인하세요.</p>
+
+      <h3 id="function-log">10.7 상용로그: log</h3>
+      <p><code>log</code> 는 밑이 10인 로그입니다.</p>
+      <pre><code>log(100)</code></pre>
+      <p>결과:</p>
+      <pre><code>2</code></pre>
+
+      <h3 id="function-ln">10.8 자연로그: ln</h3>
+      <p><code>ln</code> 은 밑이 e인 로그입니다.</p>
+      <pre><code>ln(e)</code></pre>
+      <p>결과:</p>
+      <pre><code>1</code></pre>
+
+      <h3 id="function-round">10.9 반올림: round</h3>
+      <p>소수를 반올림합니다.</p>
+      <pre><code>round(12.6)</code></pre>
+      <p>결과:</p>
+      <pre><code>13</code></pre>
+      <pre><code>round(12.4)</code></pre>
+      <p>결과:</p>
+      <pre><code>12</code></pre>
+      <p>금액이나 개수처럼 소수를 정수로 정리하고 싶을 때 사용할 수 있습니다.</p>
+
+      <h3 id="function-floor">10.10 내림: floor</h3>
+      <p>소수를 내림합니다.</p>
+      <pre><code>floor(12.9)</code></pre>
+      <p>결과:</p>
+      <pre><code>12</code></pre>
+      <p>소수 부분을 항상 아래쪽으로 처리하고 싶을 때 사용합니다.</p>
+
+      <h3 id="function-ceil">10.11 올림: ceil</h3>
+      <p>소수를 올림합니다.</p>
+      <pre><code>ceil(12.1)</code></pre>
+      <p>결과:</p>
+      <pre><code>13</code></pre>
+      <p>필요 수량이나 박스 수처럼 조금이라도 초과하면 하나 더 필요한 계산에 편리합니다.</p>
+
+      <h4>사용 예: 한 박스에 6개씩 들어가는 상품의 필요 박스 수</h4>
+      <pre><code>ceil(필요 수량 ÷ 6)</code></pre>
+      <p>필요 수량이 13개일 때:</p>
+      <pre><code>ceil(13 ÷ 6)</code></pre>
+      <p>결과:</p>
+      <pre><code>3</code></pre>
+
+      <h3 id="function-min-max">10.12 최솟값・최댓값: min / max</h3>
+      <p><code>min</code> 은 여러 값 중 가장 작은 값을, <code>max</code> 는 여러 값 중 가장 큰 값을 구합니다.</p>
+
+      <pre><code>min(240 ÷ 2, 138, 15 × 10)</code></pre>
+      <p>결과:</p>
+      <pre><code>120</code></pre>
+
+      <pre><code>max(240 ÷ 2, 138, 15 × 10)</code></pre>
+      <p>결과:</p>
+      <pre><code>150</code></pre>
+
+      <p><code>min</code> 과 <code>max</code> 는 단순히 최솟값・최댓값을 구할 때뿐 아니라, 계산식 안에서 상한이나 하한을 두고 싶을 때도 유용합니다.</p>
+
+      <h3 id="function-min-max-examples">10.13 min / max 응용 예</h3>
+      <p><code>min</code> 과 <code>max</code> 를 사용하면 계산식 안에서 “일정 값을 넘지 않게 하기”, “일정 값보다 작아지지 않게 하기”, “일정 값을 넘은 부분만 계산하기” 같은 처리를 만들 수 있습니다.</p>
+
+      <h4>응용 예: 일정 값을 넘은 부분만 더하기</h4>
+      <p><code>max</code> 를 사용하면 일정 값을 넘은 부분만 계산에 사용할 수 있습니다.</p>
+
+      <p>예: 배달 보상 계산</p>
+      <ul>
+        <li>기본 보상은 3600</li>
+        <li>배달 거리 10km까지는 기본 보상만 적용</li>
+        <li>10km를 넘은 부분은 1km당 100 추가</li>
+      </ul>
+
+      <pre><code>3600 + 100 × max(0, 거리 - 10)</code></pre>
+
+      <p><code>max(0, 거리 - 10)</code> 에 의해 거리가 10km 이하이면 추가분은 0이 되고, 10km를 넘은 경우에만 초과분이 더해집니다.</p>
+
+      <h4>응용 예: 상한 설정하기</h4>
+      <p><code>min</code> 을 사용하면 계산 결과가 일정 값을 넘지 않도록 할 수 있습니다.</p>
+
+      <p>예: 20% 할인 금액에 상한 1000 설정하기</p>
+
+      <pre><code>min(가격 × 20%, 1000)</code></pre>
+
+      <p>가격의 20%를 할인 금액으로 계산하면서, 할인 금액이 1000을 넘는 경우에는 1000으로 제한됩니다.</p>
+
+      <p>이처럼 <code>min</code> / <code>max</code> 를 사용하면 간단한 조건이 들어간 계산식도 만들 수 있습니다.</p>
+
+      <h3 id="function-comma">10.14 쉼표: ,</h3>
+      <p>쉼표는 <code>min</code> 이나 <code>max</code> 등에서 여러 값을 구분하기 위해 사용합니다.</p>
+      <pre><code>max(100, 200, 300)</code></pre>
+      <p>쉼표는 자릿수 구분 기호가 아니라 함수의 인수를 구분하기 위한 기호입니다.</p>
+
+      <p class="back-to-toc"><a href="#toc">목차로 돌아가기</a></p>
+    </section>
+
+    <section id="section-11">
+      <h2>11. 함수를 사용할 때의 주의점</h2>
+      <p>함수를 사용할 때는 다음 사항에 주의하세요.</p>
+
+      <h3>11.1 괄호 닫기</h3>
+      <p>함수에서는 괄호 안에 계산할 값을 입력합니다.</p>
+
+      <p>올바른 예:</p>
+      <pre><code>√(9)</code></pre>
+      <pre><code>sin(30)</code></pre>
+
+      <p>불완전한 예:</p>
+      <pre><code>√(</code></pre>
+      <pre><code>sin(30</code></pre>
+
+      <p>괄호가 닫혀 있지 않으면 계산할 수 없습니다.</p>
+
+      <h3>11.2 min / max에는 두 개 이상의 값이 필요</h3>
+      <p><code>min</code> 과 <code>max</code> 는 여러 값을 비교하기 위한 함수입니다.</p>
+
+      <p>올바른 예:</p>
+      <pre><code>max(100, 200)</code></pre>
+
+      <p>불완전한 예:</p>
+      <pre><code>max(100)</code></pre>
+
+      <p>값이 하나뿐이면 비교할 대상이 없으므로 두 개 이상의 값을 입력하세요.</p>
+
+      <h3>11.3 쉼표 위치 주의하기</h3>
+      <p>쉼표는 값과 값 사이에 입력합니다.</p>
+
+      <p>올바른 예:</p>
+      <pre><code>max(100, 200, 300)</code></pre>
+
+      <p>불완전한 예:</p>
+      <pre><code>max(100, 200, )</code></pre>
+      <pre><code>max(,100)</code></pre>
+
+      <h3>11.4 계산할 수 없는 값이 있음</h3>
+      <p><code>√(-1)</code>, <code>log(0)</code>, <code>ln(0)</code> 처럼 함수에 따라 계산할 수 없는 값이 있습니다.</p>
+      <p>이런 경우에는 입력 내용을 확인하세요.</p>
+
+      <h3>11.5 삼각 함수에서는 각도 단위 확인하기</h3>
+      <p><code>sin</code>, <code>cos</code>, <code>tan</code> 을 사용할 때는 각도 단위가 DEG인지 RAD인지 확인하세요.</p>
+      <p>예를 들어 DEG에서는 다음과 같이 계산됩니다.</p>
+      <pre><code>sin(30) = 0.5</code></pre>
+      <p>RAD에서는 같은 <code>30</code> 이라도 의미가 달라집니다.</p>
+
+      <p class="back-to-toc"><a href="#toc">목차로 돌아가기</a></p>
+    </section>
+
+    <section id="section-12">
+      <h2>12. 정리</h2>
+      <p>CalcPad는 일반 계산기로 사용하면서 자주 쓰는 계산식과 값을 저장해 다시 사용할 수 있는 계산기 앱입니다.</p>
+      <ul>
+        <li>자주 쓰는 계산은 계산식으로 저장하기</li>
+        <li>자주 쓰는 값은 프리셋으로 등록하기</li>
+        <li>계산 결과와 식은 COPY / PASTE로 재사용하기</li>
+        <li>이전에 복사한 값은 HISTORY에서 불러오기</li>
+        <li>PRO에서는 기본 함수를 사용해 더 유연하게 계산하기</li>
+      </ul>
+      <p>매번 같은 계산을 입력하는 번거로움을 줄이고, 일상적인 계산을 더 부드럽게 처리할 수 있습니다.</p>
+      <p class="back-to-toc"><a href="#toc">목차로 돌아가기</a></p>
+    </section>
+  </div>
+</body>
+</html>
