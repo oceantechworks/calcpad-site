@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Guide d’utilisation de CalcPad 2.0.0 : calculatrice, ANS, HISTORY, mémoire, préréglages, formules, fonctions, sauvegarde et récupération des données.">
+  <title>Guide d’utilisation de CalcPad — 2.0.0 (français)</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --accent: #0f766e;
+      --accent-soft: #e6fffa;
+      --code-bg: #f3f4f6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", sans-serif;
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    .page {
+      width: min(100%, 920px);
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    header,
+    nav,
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      line-height: 1.35;
+      margin-top: 0;
+      color: var(--text);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      font-size: 1.12rem;
+      margin-top: 24px;
+      margin-bottom: 8px;
+    }
+
+    h4 {
+      font-size: 1rem;
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    ul,
+    ol {
+      padding-left: 1.4em;
+      margin-top: 8px;
+      margin-bottom: 14px;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .lead {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .toc-list {
+      columns: 1;
+      list-style-position: inside;
+      padding-left: 0;
+    }
+
+    .toc-sublist {
+      list-style-position: inside;
+      margin-top: 6px;
+      margin-bottom: 0;
+      padding-left: 1.2em;
+      font-size: 0.95rem;
+    }
+
+    .note {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin: 14px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 18px;
+      overflow-wrap: anywhere;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f9fafb;
+      font-weight: 700;
+    }
+
+    td.numeric {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      background: var(--code-bg);
+      border-radius: 6px;
+      padding: 0.08em 0.35em;
+      font-size: 0.95em;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border-radius: 12px;
+      padding: 12px 14px;
+      overflow-x: auto;
+      margin: 10px 0 16px;
+      border: 1px solid var(--border);
+    }
+
+    pre code {
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+      font-size: 0.94em;
+      white-space: pre;
+    }
+
+    .back-to-toc {
+      margin-top: 22px;
+      margin-bottom: 0;
+      text-align: right;
+      font-size: 0.95rem;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 16px 12px 40px;
+      }
+
+      header,
+      nav,
+      section {
+        padding: 16px;
+        border-radius: 14px;
+      }
+
+      h1 {
+        font-size: 1.55rem;
+      }
+
+      h2 {
+        font-size: 1.22rem;
+      }
+
+      table {
+        font-size: 0.94rem;
+      }
+    }
+
+    html { scroll-behavior: auto; }
+    body { overflow-wrap: anywhere; }
+    section, nav, header { min-width: 0; }
+    [id] { scroll-margin-top: 16px; }
+    code { overflow-wrap: anywhere; }
+    pre code { overflow-wrap: normal; }
+    .table-scroll { overflow-x: auto; max-width: 100%; }
+    .table-scroll:focus { outline: 2px solid var(--accent); }
+    .warning { background: #fff7ed; border-left-color: #b45309; }
+    .version { color: var(--muted); }
+    .key { font-weight: 700; }
+    footer { padding: 12px 8px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header id="top">
+      <h1>Guide d’utilisation de CalcPad</h1>
+      <p class="version">2.0.0 · Français</p>
+      <p class="lead">Calculez, rappelez vos résultats et enregistrez les valeurs et formules que vous utilisez souvent. Suivez ce guide en manipulant directement les boutons de l’application.</p>
+    </header>
+    <nav id="toc" aria-label="Sommaire">
+      <h2>Sommaire</h2>
+      <ol class="toc-list">
+        <li><a href="#section-1">Ce que permet CalcPad</a></li>
+        <li><a href="#section-2">Utiliser la calculatrice</a></li>
+        <li><a href="#section-3">Utiliser ANS</a></li>
+        <li><a href="#section-4">Utiliser HISTORY</a></li>
+        <li><a href="#section-5">Utiliser la mémoire</a></li>
+        <li><a href="#section-6">Utiliser les préréglages</a></li>
+        <li><a href="#section-7">Créer des formules</a></li>
+        <li><a href="#section-8">Exécuter une formule enregistrée</a></li>
+        <li><a href="#section-9">Utiliser les fonctions</a><ul class="toc-sublist"><li><a href="#function-scientific">E, π et e</a></li><li><a href="#function-list">Fonctions et exemples</a></li><li><a href="#function-arguments">Les virgules dans min/max</a></li><li><a href="#function-applications">Exemples pratiques</a></li></ul></li>
+        <li><a href="#section-10">Précision des calculs et affichage</a></li>
+        <li><a href="#section-11">Sauvegarde et restauration</a></li>
+        <li><a href="#section-12">Free et PRO</a></li>
+        <li><a href="#section-13">Problèmes d’enregistrement et de lecture des données</a></li>
+        <li><a href="#section-14">Migration et récupération après une mise à jour</a></li>
+        <li><a href="#section-15">Réglages et précautions d’utilisation</a></li>
+
+      </ol>
+    </nav>
+    <section id="section-1">
+      <h2>1. Ce que permet CalcPad</h2>
+
+<p>CalcPad associe une calculatrice classique à l’enregistrement de valeurs et de formules réutilisables. Dans ce guide, les formules enregistrées sont aussi appelées « modèles de calcul ».</p>
+<ul><li>Calculer avec les opérations arithmétiques, les parenthèses, les pourcentages et les puissances</li><li>Rappeler le dernier résultat avec ANS et les résultats précédents dans HISTORY</li><li>Ajouter des valeurs à la mémoire ou en soustraire pour tenir un total</li><li>Enregistrer les nombres fréquents comme préréglages et les calculs répétitifs comme formules</li><li>Utiliser des fonctions et des constantes. Certaines fonctions, ainsi que la sauvegarde et la restauration, nécessitent PRO</li></ul>
+<p>Commencez par <a href="#section-2">un calcul classique</a>, puis réutilisez le résultat avec <a href="#section-3">ANS</a> ou <a href="#section-4">HISTORY</a>.</p>
+<div class="note"><strong>Importer les exemples au premier lancement</strong><p>Si « Importer les exemples ? » apparaît au premier lancement, choisissez « Importer » pour ajouter 2 formules et 3 préréglages. « Ignorer » permet de commencer sans données. Les deux possibilités sont disponibles avec Free.</p><p>Les exemples actuels comprennent notamment une formule d’IMC et des préréglages pour les centimètres/pouces, la pesanteur normale g et le nombre d’or φ. Vous pouvez modifier ou supprimer ces exemples.</p></div>
+
+      <p class="back-to-toc"><a href="#toc">Retour au sommaire</a></p>
+    </section>
+    <section id="section-2">
+      <h2>2. Utiliser la calculatrice</h2>
+
+<h3>2.1 Saisir et calculer</h3><ol><li>Touchez les chiffres et les opérateurs. Exemple : <code>1200 × 5 × 80%</code>.</li><li>Touchez <code>=</code> (avec ENTER en dessous).</li><li>L’expression et le résultat <code>4800</code> apparaissent dans le Log de l’écran de calcul.</li></ol>
+<p><code>80%</code> signifie <code>0.8</code>. <code>200 + 10%</code> donne <code>200.1</code>. Pour augmenter 200 de 10 %, saisissez <code>200 × (1 + 10%)</code>.</p>
+<h3>2.2 Corriger la saisie</h3><ul><li>Touchez la ligne de saisie pour déplacer le curseur. Les touches <code>◀</code>/<code>▶</code> permettent aussi de le déplacer à gauche ou à droite.</li><li><code>⌫</code> efface juste avant le curseur.</li><li>Un appui simple sur <code>C/AC</code> efface l’expression en cours. Dans la calculatrice classique, un appui long efface la saisie et le Log affiché.</li><li>C/AC n’efface ni ANS, ni HISTORY, ni la mémoire.</li></ul>
+<h3>2.3 Parenthèses, puissances et poursuite d’un calcul</h3><p>Vous pouvez saisir des expressions telles que <code>(2 + 3) × 4 = 20</code> ou <code>2 ^ 3 = 8</code>. Les multiplications et divisions sont effectuées avant les additions et soustractions. Pour poursuivre avec le résultat, utilisez ANS plutôt que de le saisir à nouveau.</p>
+<h3>2.4 Réutiliser le Log</h3>
+<p>Le Log présente les étapes des calculs sur l’écran actuel. Un <strong>appui long sur une ligne d’expression déjà calculée</strong> insère cette expression à la position du curseur dans la ligne de saisie. Par exemple, rappelez <code>100×1.1+500</code>, remplacez 100 par 200, puis recalculez.</p>
+<p>Un <strong>appui long sur une ligne de résultat</strong> insère le résultat comme valeur confirmée entre parenthèses. Même si l’affichage est arrondi, la valeur de calcul conservée est réutilisée. Vous pouvez aussi maintenir le doigt sur une ligne de variable confirmée d’une formule : seul le nombre est inséré comme valeur confirmée, sans le nom ni l’unité de la variable.</p>
+<p>Cette opération insère le contenu dans CalcPad ; elle ne le copie pas dans le presse-papiers du système. L’appui long ne lance aucun calcul. Complétez ou modifiez la saisie, puis touchez <code>=</code> pour calculer. Effacer le Log ne supprime pas les enregistrements de HISTORY.</p>
+
+      <p class="back-to-toc"><a href="#toc">Retour au sommaire</a></p>
+    </section>
+    <section id="section-3">
+      <h2>3. Utiliser ANS</h2>
+
+<p>ANS conserve une seule valeur : le résultat du dernier calcul réussi, qu’il s’agisse d’un calcul classique ou du résultat final d’une formule exécutée jusqu’au bout. Un calcul échoué ou la saisie intermédiaire d’une variable laisse l’ancienne valeur d’ANS inchangée.</p>
+<h3>3.1 Rappeler le dernier résultat</h3><ol><li>Saisissez <code>12 × 8</code>, puis touchez <code>=</code> pour obtenir <code>96</code>.</li><li>Faites un appui simple sur <code>ANS</code>. Une valeur verte entre parenthèses est insérée au curseur.</li><li>Ajoutez <code>÷ 3</code>, puis touchez <code>=</code> pour obtenir <code>32</code>.</li></ol>
+<p>Le rappel insère la valeur disponible à cet instant. Une modification ultérieure d’ANS ne change pas une valeur déjà insérée. Il réutilise la valeur de calcul conservée, et non les seuls chiffres visibles après l’arrondi ou la réduction de l’affichage.</p>
+<h3>3.2 Conservation, mise à jour et effacement d’ANS</h3><ul><li>Si ANS n’a pas encore de valeur, un appui simple n’insère rien. 0 est un résultat de calcul valide.</li><li>Après un enregistrement réussi, ANS est conservé à la réouverture de l’application.</li><li>Un nouveau résultat réussi remplace ANS. Aucun bouton ne permet d’effacer uniquement ANS.</li><li>Supprimer des entrées de HISTORY ou utiliser MC n’efface pas ANS. <strong>ANS n’est pas inclus dans les sauvegardes.</strong></li></ul>
+<div class="note"><p><code>ANS</code> ouvre HISTORY par un <strong>appui long</strong>. Un appui simple, lui, insère sa valeur.</p></div>
+
+      <p class="back-to-toc"><a href="#toc">Retour au sommaire</a></p>
+    </section>
+    <section id="section-4">
+      <h2>4. Utiliser HISTORY</h2>
+
+<p>HISTORY enregistre automatiquement les expressions et résultats des calculs réussis. Il conserve jusqu’à 30 entrées et retire les plus anciennes au-delà de cette limite. Les calculs classiques et les résultats finaux des formules sont enregistrés, mais pas les résultats intermédiaires des variables ni les opérations qui insèrent seulement une valeur.</p>
+<p><strong>Chaque expression reste telle qu’elle était affichée au moment du calcul.</strong> Modifier ensuite le nombre de décimales, l’arrondi, les séparateurs ou la langue de l’application ne change pas l’expression enregistrée. Pour une formule, HISTORY affiche l’expression avec les valeurs des variables utilisées, ainsi que le nom de la formule au moment de l’exécution.</p>
+<p>Par exemple, avec 6 décimales et un arrondi au plus proche, <code>1÷3</code> affiche <code>0.333333</code>. Insérez ensuite ANS et calculez <code>(0.333333)×3</code> : le résultat affiché est <code>1</code>. Dans HISTORY, les expressions restent <code>1÷3</code> et <code>(0.333333)×3</code>. Elles ne sont pas remplacées par de longues valeurs internes et un simple arrondi d’affichage n’ajoute pas ≒. Si une valeur non nulle s’affiche comme 0, l’indication <code>≒ 0</code> est conservée.</p>
+<p><strong>L’affichage des résultats</strong> conserve le nombre de décimales et la méthode d’arrondi utilisés lors du calcul. Seule la notation des séparateurs suit les réglages actuels. Un affichage arrondi de l’expression ou du résultat ne signifie pas que le résultat interne est enregistré avec cet arrondi d’affichage. La valeur conservée avec sa précision reste réutilisable.</p>
+<h3>4.1 Rappeler un résultat précédent</h3><ol><li>Maintenez le doigt sur <code>ANS</code> à l’accueil. Le libellé HISTORY apparaît en dessous.</li><li>Les entrées récentes sont en bas de la liste. Faites défiler vers le haut pour consulter les plus anciennes.</li><li>Touchez la zone de l’expression ou du résultat de l’entrée souhaitée.</li><li>Si l’insertion réussit, vous revenez à la calculatrice avec une valeur confirmée entre parenthèses au curseur.</li></ol>
+<p>C’est le <strong>résultat</strong> enregistré qui est inséré. L’expression de l’historique n’est ni recalculée ni rappelée sous une forme modifiable. L’insertion seule ne met à jour ni ANS, ni HISTORY, ni le Log, ni la mémoire.</p>
+<h3>4.2 Actions sur chaque entrée</h3><div class="table-scroll" tabindex="0" aria-label="Actions de HISTORY"><table><thead><tr><th scope="col">Action</th><th scope="col">Effet</th></tr></thead><tbody><tr><td>M+/M-</td><td>Ajoute le résultat de cette entrée à la mémoire ou l’en soustrait. La valeur utilisée diffère de celle des touches M+/M- à l’accueil.</td></tr><tr><td>Menu à trois points → Enregistrer comme préréglage</td><td>Enregistre le résultat avec un nom, tout en conservant sa valeur. Pour une entrée de formule, le nom initial est celui de la formule.</td></tr><tr><td>Menu à trois points → Copier vers l’OS</td><td>Copie le nombre du résultat dans le presse-papiers de l’appareil, pour le coller dans une autre application. L’expression entière n’est pas copiée.</td></tr><tr><td>Menu à trois points → Suppr.</td><td>Supprime cette entrée.</td></tr></tbody></table></div>
+<h3>4.3 Tout effacer et conserver l’historique</h3><p>Touchez le bouton d’effacement total en haut de l’écran, lisez « Effacer tout l’historique ? », puis choisissez « Effacer ». Les entrées supprimées ne peuvent pas être récupérées. Une suppression individuelle ou totale ne change ni ANS ni la mémoire.</p>
+<p>Après un enregistrement réussi, HISTORY reste disponible au prochain lancement. <strong>Il n’est pas inclus dans les sauvegardes.</strong> En cas d’échec d’enregistrement, consultez <a href="#section-13">Problèmes d’enregistrement et de lecture des données</a>.</p>
+
+      <p class="back-to-toc"><a href="#toc">Retour au sommaire</a></p>
+    </section>
+    <section id="section-5">
+      <h2>5. Utiliser la mémoire</h2>
+
+<p>La mémoire permet de cumuler plusieurs résultats par addition ou soustraction. Sa valeur initiale est 0. Elle apparaît sous la forme <code>M = …</code> en haut de l’accueil et en bas de HISTORY.</p>
+<div class="table-scroll" tabindex="0" aria-label="Actions des touches mémoire"><table><thead><tr><th scope="col">Touche</th><th scope="col">Action à l’accueil</th></tr></thead><tbody><tr><td>MC</td><td>Remet la mémoire à la valeur exacte 0.</td></tr><tr><td>MR</td><td>Insère la valeur actuelle de la mémoire au curseur, sans effacer la mémoire.</td></tr><tr><td>M+</td><td>Ajoute le dernier résultat de calcul réussi (ANS).</td></tr><tr><td>M-</td><td>Soustrait le dernier résultat de calcul réussi (ANS).</td></tr></tbody></table></div>
+<h3>5.1 Additionner 100 et 30</h3><ol><li>Touchez <code>MC</code> pour mettre la mémoire à 0.</li><li>Saisissez <code>100</code>, puis touchez <code>=</code> et <code>M+</code>. La mémoire vaut 100.</li><li>Saisissez <code>30</code>, puis touchez <code>=</code> et <code>M+</code>. La mémoire vaut 130.</li><li><code>MR</code> insère 130 dans la saisie. Si ANS vaut toujours 30, touchez <code>M-</code> pour ramener la mémoire à 100.</li></ol>
+<div class="note"><strong>Vérifiez la valeur utilisée par M+/M-</strong><p>À l’accueil, ces touches utilisent ANS, et non le nombre en cours de saisie. Saisir 100 puis toucher M+ n’ajoute donc pas forcément 100. Effectuez d’abord un calcul réussi avec <code>=</code>. Si ANS n’a pas de valeur, la mémoire ne change pas. Pendant la saisie des variables d’une formule, le dernier résultat final réussi reste la valeur utilisée.</p></div>
+<h3>5.2 Agir sur la mémoire depuis HISTORY</h3><p>M+/M- sur une entrée de HISTORY utilisent le résultat de cette entrée. Dans la barre du bas, touchez la zone <code>M = …</code> à gauche de MC pour insérer la mémoire comme avec MR et revenir à la calculatrice. MC remet uniquement la mémoire à 0 et laisse HISTORY ouvert.</p>
+<p>Les additions et soustractions en mémoire, ainsi que MC, ne changent ni l’expression en cours, ni ANS, ni l’historique. MR insère seulement une valeur et ne crée aucun nouvel enregistrement de calcul réussi. Après un enregistrement réussi, la mémoire est conservée au redémarrage, mais <strong>elle n’est pas incluse dans les sauvegardes</strong>. <code>M = —</code> indique une mémoire indisponible, et non une valeur normale de 0.</p>
+
+      <p class="back-to-toc"><a href="#toc">Retour au sommaire</a></p>
+    </section>
+    <section id="section-6">
+      <h2>6. Utiliser les préréglages</h2>
+
+<p>Les préréglages enregistrent avec un nom les nombres fréquemment utilisés, tels qu’un prix unitaire, un taux de taxe ou un coefficient de conversion. Contrairement à la mémoire, ils servent à rappeler plusieurs fois une même valeur plutôt qu’à cumuler des additions ou soustractions.</p>
+<h3>6.1 Enregistrer un préréglage</h3><ol><li>Touchez <code>PRE</code> pour ouvrir « Préréglages ».</li><li>Touchez <code>＋</code> en haut à droite pour en ajouter un.</li><li>Saisissez la valeur et, si nécessaire, un libellé, puis enregistrez. Exemple : libellé « Tarif horaire », valeur <code>1500</code>.</li></ol>
+<p>Pour conserver un résultat de calcul, choisissez « Enregistrer comme préréglage » dans le menu à trois points de HISTORY. Il n’est pas nécessaire de ressaisir les chiffres arrondis à l’écran. Pour cet enregistrement, la valeur est fixe et vous pouvez modifier son nom.</p>
+<h3>6.2 Rappeler et modifier un préréglage</h3><ul><li>Ouvrez <code>PRE</code> et touchez une entrée pour l’insérer au curseur comme valeur confirmée verte entre parenthèses.</li><li>Le menu à trois points de chaque entrée propose « Modifier » et « Suppr. ».</li><li>Choisissez « Réordonner », déplacez les entrées par glissement, puis touchez « Terminé » pour revenir à l’affichage normal.</li></ul>
+<p>Free permet jusqu’à 5 préréglages, y compris les 3 exemples du premier lancement. Les exemples actuels sont « cm / pouce : 2.54 », « Pesanteur normale g : 9.80665 » et « Nombre d’or φ : 1.618 ». Pour saisir π, utilisez <code>FUNC</code> plutôt qu’un préréglage.</p>
+<p>Les préréglages sont inclus dans les sauvegardes. Une mise à jour des exemples ne remplace pas automatiquement les préréglages que vous avez déjà enregistrés.</p>
+
+      <p class="back-to-toc"><a href="#toc">Retour au sommaire</a></p>
+    </section>
+    <section id="section-7">
+      <h2>7. Créer des formules</h2>
+
+<p>Si vous répétez les mêmes étapes de calcul, enregistrez une formule pour ne saisir que les valeurs qui changent. Créons par exemple « Prix unitaire × Quantité × 1.1 ».</p>
+<ol><li>Touchez <code>ƒ(x)</code> pour ouvrir « Formules », puis <code>＋</code> en haut à droite.</li><li>Dans « Infos de base », saisissez par exemple « Total TTC » dans « Nom de la formule (obligatoire) ». La description est facultative.</li><li>Dans « Paramètres du résultat du calcul », choisissez le nom du résultat, le nombre de décimales et l’arrondi.</li><li>Avec le bouton d’ajout de « Variables », créez « Prix unitaire » (clé a) et « Quantité » (clé b), de type Nombre.</li><li>Dans la zone « Formule », utilisez les boutons de variables, les opérateurs et les chiffres pour construire <code>a × b × 1.1</code>.</li><li>Touchez « Enregistrer ».</li></ol>
+<h3>7.1 Qu’est-ce qu’une variable ?</h3><p>Une variable est une valeur à saisir à chaque exécution. Son nom peut être « Prix unitaire » et sa clé dans l’expression <code>a</code>. Une valeur initiale peut servir de suggestion de saisie. Pour enregistrer une formule, vous devez créer au moins une variable et utiliser au moins une variable déclarée dans l’expression. Il n’est pas nécessaire d’utiliser toutes les variables déclarées.</p>
+<p>Choisissez le type « Nombre » ou « % » (pourcentage). Le bouton d’une variable de pourcentage insère par exemple <code>a%</code> ; saisir 10 à l’exécution correspond alors à 10 %. N’ajoutez pas une seconde division par 100 dans la formule.</p>
+<p>La lettre minuscule <code>e</code> est réservée au nombre d’Euler et ne peut pas servir de clé de variable.</p>
+<h3>7.2 Fonctions, arrondi et modification</h3><p>Dans l’éditeur d’expression, le bouton des fonctions s’appelle « Func ». E, π et e sont disponibles avec Free ; les autres fonctions nécessitent PRO. L’unité d’angle des fonctions trigonométriques est enregistrée pour chaque formule.</p>
+<div class="note"><strong>Les décimales d’une formule déterminent son résultat final</strong><p>Le nombre de décimales et l’arrondi choisis ici s’appliquent au résultat final lui-même. Ce n’est pas un simple changement de l’affichage à l’accueil. C’est aussi ce résultat finalisé qui est enregistré dans ANS et HISTORY.</p></div>
+<p>Le menu à trois points de la liste des formules permet de les modifier ou de les supprimer. « Réordonner » permet de changer leur ordre. Avant de supprimer une variable utilisée, retirez-la de l’expression. La suppression est irréversible.</p>
+
+      <p class="back-to-toc"><a href="#toc">Retour au sommaire</a></p>
+    </section>
+    <section id="section-8">
+      <h2>8. Exécuter une formule enregistrée</h2>
+
+<ol><li>Touchez <code>ƒ(x)</code> pour ouvrir la liste, puis sélectionnez la formule souhaitée.</li><li>Saisissez la valeur de la variable affichée et validez avec <code>=</code>/ENTER.</li><li>Lorsque la variable suivante apparaît, saisissez et validez sa valeur de la même manière.</li><li>Le résultat apparaît après validation de la dernière variable.</li></ol>
+<p>Avec « Prix unitaire × Quantité × 1.1 », un prix unitaire de 1200 et une quantité de 3 donnent 3960.</p>
+<pre><code>[Prix unitaire] = 1200
+[Quantité] = 3
+[Résultat] = 3960</code></pre>
+<p>Dans la saisie d’une variable, vous pouvez aussi effectuer un calcul comme <code>1200 × 2</code> ou insérer une valeur depuis ANS, MR, les préréglages ou HISTORY. L’insertion est impossible lorsque la saisie n’est pas autorisée, notamment après l’affichage du résultat.</p>
+<p>Un résultat final réussi met à jour ANS et est enregistré dans HISTORY avec le nom de la formule. Les saisies intermédiaires de variables ne mettent pas ANS à jour. Pour abandonner la saisie et revenir à la calculatrice classique, maintenez le doigt sur <code>C/AC</code>.</p>
+
+      <p class="back-to-toc"><a href="#toc">Retour au sommaire</a></p>
+    </section>
+    <section id="section-9">
+      <h2>9. Utiliser les fonctions</h2>
+
+<p>Touchez <code>FUNC</code> à l’accueil pour ouvrir le clavier de fonctions. Il comporte 4 colonnes et 4 lignes, comme ci-dessous. <strong>E, π et e sont disponibles avec Free ; les 13 autres touches nécessitent PRO</strong>.</p>
+<div class="table-scroll" tabindex="0" aria-label="Disposition du clavier de fonctions"><table><tbody><tr><td>E</td><td>π</td><td>e</td><td>eˣ</td></tr><tr><td>sin</td><td>cos</td><td>tan</td><td>√</td></tr><tr><td>log</td><td>ln</td><td>max</td><td>min</td></tr><tr><td>round</td><td>floor</td><td>ceil</td><td>|x|</td></tr></tbody></table></div>
+<p>Lorsque la touche d’une fonction insère des parenthèses ou d’autres signes, saisissez la valeur au curseur. « Aide sur les fonctions » ouvre les explications intégrées à l’application.</p>
+<h3 id="function-scientific">9.1 Notation scientifique E et constantes π et e</h3><ul><li><code>1.2E3</code> signifie <code>1.2 × 10^3 = 1200</code>. <code>1.2E-3</code> signifie <code>0.0012</code>. Saisissez E après un nombre, puis l’exposant. E seul ou un exposant incomplet ne peut pas être calculé.</li><li><code>π</code> est le nombre pi. L’aire d’un cercle de rayon 5 se calcule avec <code>π × 5 ^ 2</code> et vaut environ <code>78.539816</code> (exemple avec 6 décimales affichées).</li><li>La minuscule <code>e</code> est le nombre d’Euler, soit environ <code>2.718282</code>. Elle est distincte du E majuscule de la notation scientifique.</li></ul>
+<h3 id="function-list">9.2 Fonctions et exemples de saisie</h3><p>Les touches ci-dessous nécessitent PRO. Les résultats sont des exemples d’affichage ; certaines fonctions utilisent des calculs approchés.</p>
+<div class="table-scroll" tabindex="0" aria-label="Fonctions et exemples de calcul"><table><thead><tr><th scope="col">Touche et fonction</th><th scope="col">Exemple de saisie</th><th scope="col">Exemple de résultat</th></tr></thead><tbody>
+<tr><td>eˣ : puissance de e</td><td><code>e^(2)</code></td><td>Environ 7.389056</td></tr>
+<tr><td>sin : sinus</td><td><code>sin(30)</code></td><td>0.5 (DEG)</td></tr><tr><td>cos : cosinus</td><td><code>cos(60)</code></td><td>0.5 (DEG)</td></tr><tr><td>tan : tangente</td><td><code>tan(45)</code></td><td>1 (DEG)</td></tr>
+<tr><td>√ : racine carrée</td><td><code>√(9)</code></td><td>3</td></tr><tr><td>log : logarithme en base 10</td><td><code>log(100)</code></td><td>2</td></tr><tr><td>ln : logarithme en base e</td><td><code>ln(e)</code></td><td>1</td></tr>
+<tr><td>max : maximum</td><td><code>max(240 ÷ 2, 138, 15 × 10)</code></td><td>150</td></tr><tr><td>min : minimum</td><td><code>min(240 ÷ 2, 138, 15 × 10)</code></td><td>120</td></tr>
+<tr><td>round : arrondi au plus proche</td><td><code>round(12.6)</code></td><td>13</td></tr><tr><td>floor : entier inférieur</td><td><code>floor(-1.2)</code></td><td>-2</td></tr><tr><td>ceil : entier supérieur</td><td><code>ceil(-1.2)</code></td><td>-1</td></tr><tr><td>|x| : valeur absolue</td><td><code>|1200 - 1500|</code></td><td>300</td></tr>
+</tbody></table></div>
+<h3 id="function-arguments">9.3 min/max et les virgules</h3><p>min/max nécessitent au moins 2 valeurs. Dans la calculatrice classique, <code>, NEXT ARG</code> apparaît en bas à droite de l’écran de calcul lorsque le curseur se trouve dans leurs arguments. À une position valide, cette touche insère une virgule et une espace. Dans l’éditeur de formule, utilisez la touche virgule du constructeur d’expression.</p>
+<p>La virgule sépare ici les arguments. Ne la confondez pas avec un séparateur de milliers : saisissez par exemple <code>max(100, 200)</code>. <code>max(100, )</code> est incomplet, car la dernière valeur manque.</p>
+<h3 id="function-applications">9.4 Exemples pratiques</h3><p>Si vous avez besoin de 13 articles et qu’une boîte en contient 6, il vous faut <code>ceil(13 ÷ 6) = 3</code> boîtes.</p>
+<p>Pour une rémunération de base de 3600, augmentée de 100 par km au-delà de 10 km, utilisez <code>3600 + 100 × max(0, a - 10)</code>, où a est la distance. Pour a = 8, le résultat est 3600 ; pour a = 15, il est 4100.</p>
+<p>Pour accorder une remise de 20 % sur un prix en la plafonnant à 1000, utilisez <code>min(a × 20%, 1000)</code>, où a est le prix. La remise est de 600 pour 3000, et de 1000 pour 8000.</p>
+<h3>9.5 Unités d’angle et comportement après saisie</h3><p>Choisissez DEG (degrés) ou RAD (radians) dans le panneau de fonctions de la calculatrice classique. L’en-tête de l’accueil affiche DEG/RAD lorsque l’expression contient des fonctions trigonométriques. Les formules utilisent chacune leur unité d’angle enregistrée, indépendamment de celle de la calculatrice classique.</p>
+<p>« Fermer après saisie » est disponible avec Free et PRO. Si ce réglage est activé, le panneau de fonctions de la calculatrice classique se ferme après une insertion réussie ; sinon, il reste ouvert. Le panneau de fonctions du constructeur d’expression se ferme après une insertion réussie.</p>
+
+      <p class="back-to-toc"><a href="#toc">Retour au sommaire</a></p>
+    </section>
+    <section id="section-10">
+      <h2>10. Précision des calculs et affichage</h2>
+
+<h3>10.1 Valeur calculée et valeur affichée sont distinctes</h3><p>CalcPad traite aussi précisément que possible les calculs représentables par des entiers, des décimaux ou des fractions. Par exemple, <code>0.1 + 0.2</code> donne <code>0.3</code>. Cela ne signifie pas que tous les calculs sont exempts d’erreur.</p>
+<p>À la validation d’un calcul classique, le résultat est ramené à un maximum de 30 chiffres significatifs. Un arrondi qui change la valeur la rend approchée. Les calculs approchés, notamment trigonométriques et logarithmiques, prennent 15 chiffres significatifs comme référence de précision. π et e sont aussi des approximations à un nombre fini de chiffres. La distinction entre valeurs exactes et approchées est conservée lors de leur réutilisation.</p>
+<p>Les valeurs confirmées vertes entre parenthèses, insérées depuis ANS, MR, HISTORY ou les préréglages, peuvent conserver plus de chiffres que ceux affichés. Le contenu d’un bloc ne peut pas être modifié caractère par caractère ; les suppressions et opérations similaires portent sur le bloc entier. Pour changer le nombre, supprimez le bloc et saisissez une nouvelle valeur.</p>
+<h3>10.2 Affichage de la calculatrice</h3><ol><li>Ouvrez l’icône des réglages en haut à droite de l’accueil.</li><li>Dans « Affichage de la calculatrice », choisissez « Décimales », « Arrondi », « Séparateur décimal » et les options de groupement des chiffres.</li></ol>
+<p>Vous pouvez choisir de 0 à 12 décimales. Le séparateur décimal peut être un point ou une virgule. Le séparateur de groupes de chiffres peut être désactivé ou défini comme une virgule, un point ou une espace, avec un regroupement par 3 ou 4 chiffres. Les zéros finaux inutiles sont omis.</p>
+<p>Avec un affichage à 2 décimales, <code>1 ÷ 8</code> affiche <code>0.13</code>, mais la valeur calculée reste 0.125. <code>ANS × 8</code> donne donc 1. Modifier uniquement l’affichage ne change pas les valeurs enregistrées dans ANS, HISTORY ou la mémoire.</p>
+<h3>10.3 Comparer les méthodes d’arrondi</h3><p>Voici des exemples d’arrondi à 1 décimale.</p><div class="table-scroll" tabindex="0" aria-label="Comparaison des arrondis positifs et négatifs"><table><thead><tr><th scope="col">Arrondi</th><th scope="col">1.25</th><th scope="col">-1.25</th></tr></thead><tbody><tr><td>Arrondir (à mi-chemin, en s’éloignant de zéro)</td><td>1.3</td><td>-1.3</td></tr><tr><td>Arrondir vers le bas (vers les valeurs inférieures)</td><td>1.2</td><td>-1.3</td></tr><tr><td>Arrondir vers le haut (vers les valeurs supérieures)</td><td>1.3</td><td>-1.2</td></tr></tbody></table></div>
+<p>« Arrondir vers le bas » ne signifie pas simplement retirer la partie décimale d’un nombre négatif. De plus, <code>round</code>/<code>floor</code>/<code>ceil</code> transforment les valeurs en entiers dans une expression ; ce ne sont pas de simples réglages d’affichage.</p>
+<div class="note"><p><strong>Les « Paramètres du résultat du calcul » de chaque formule</strong> arrondissent et finalisent la valeur elle-même. Les additions et soustractions en mémoire ramènent aussi le résultat à 30 chiffres significatifs au maximum après chaque opération. Saisir manuellement une valeur affichée arrondie crée un nombre différent de la valeur interne d’origine.</p></div>
+<p>Si une petite valeur non nulle s’affiche comme 0 avec les décimales choisies, elle est indiquée par <code>≒ 0</code>. Les grandes valeurs peuvent utiliser la notation scientifique. Cela ne signifie pas que toutes les valeurs approchées portent le signe ≒.</p>
+
+      <p class="back-to-toc"><a href="#toc">Retour au sommaire</a></p>
+    </section>
+    <section id="section-11">
+      <h2>11. Sauvegarde et restauration</h2>
+
+<p>La sauvegarde et la restauration sont des <strong>fonctions PRO</strong>. Ouvrez Réglages → « Sauvegarde et restauration ».</p>
+<h3>11.1 Données incluses et exclues</h3><ul><li><strong>Incluses :</strong> les formules et définitions des variables, les préréglages, la langue, l’apparence, la vibration et l’affichage de la calculatrice.</li><li><strong>Exclues :</strong> ANS, HISTORY, la mémoire, le Log affiché, la saisie en cours et les réglages de fonctions de la calculatrice classique (DEG/RAD et fermeture après saisie).</li></ul>
+<p>L’unité d’angle propre à chaque formule est incluse dans sa définition.</p>
+<p>Une sauvegarde ne reproduit pas tout l’état de l’application sur l’appareil. Pour conserver un résultat important, enregistrez-le comme préréglage depuis HISTORY : il sera alors inclus dans la sauvegarde en tant que préréglage.</p>
+<p>Votre achat PRO est géré par l’historique des achats de l’App Store ou de Google Play. Restaurer une sauvegarde de données CalcPad n’annule pas l’achat lui-même. Si vous avez acheté PRO mais ne pouvez pas utiliser ses fonctions, connectez-vous au compte de la boutique utilisé lors de l’achat et essayez « Restaurer les achats » sur l’écran PRO.</p>
+<h3>11.2 Créer une sauvegarde</h3><ol><li>Touchez « Enregistrer la sauvegarde ».</li><li>Choisissez une destination de partage ou d’enregistrement et enregistrez le fichier JSON.</li><li>Vérifiez dans l’application de fichiers ou le service de stockage en ligne que le fichier a bien été enregistré à destination.</li></ol>
+<h3>11.3 Restaurer une sauvegarde</h3><ol><li>Si nécessaire, sauvegardez d’abord vos formules, préréglages et réglages actuels.</li><li>Touchez « Restaurer une sauvegarde ».</li><li>Lisez la confirmation « Restaurer (écraser) », puis choisissez « Restaurer ».</li><li>Sélectionnez le fichier de sauvegarde enregistré.</li></ol>
+<div class="note warning"><strong>La restauration remplace entièrement les données concernées</strong><p>Les formules, préréglages et réglages concernés sont remplacés par le contenu du fichier. Il ne s’agit ni d’un ajout ni d’une fusion, et l’opération est irréversible. ANS, HISTORY et la mémoire ne sont pas restaurés depuis le fichier.</p></div>
+<p>Les anciennes sauvegardes CalcPad peuvent aussi être lues si leur format est pris en charge. Les fichiers d’autres applications et les formats non pris en charge ne peuvent pas être utilisés. En cas d’échec, suivez les indications affichées sans tenter de modifier le fichier vous-même.</p>
+
+      <p class="back-to-toc"><a href="#toc">Retour au sommaire</a></p>
+    </section>
+    <section id="section-12">
+      <h2>12. Free et PRO</h2>
+
+<div class="table-scroll" tabindex="0" aria-label="Comparaison des fonctions Free et PRO"><table><thead><tr><th scope="col">Fonction</th><th scope="col">Free</th><th scope="col">PRO</th></tr></thead><tbody><tr><td>Calculs classiques, ANS, HISTORY et mémoire</td><td>Disponible</td><td>Disponible</td></tr><tr><td>Formules enregistrées</td><td>Jusqu’à 3</td><td>Nombre illimité</td></tr><tr><td>Préréglages enregistrés</td><td>Jusqu’à 5</td><td>Nombre illimité</td></tr><tr><td>E, π et e</td><td>Disponible</td><td>Disponible</td></tr><tr><td>13 autres touches de fonctions</td><td>PRO requis</td><td>Disponible</td></tr><tr><td>Sauvegarde et restauration</td><td>PRO requis</td><td>Disponible</td></tr><tr><td>Publicités</td><td>Affichées</td><td>Aucune</td></tr></tbody></table></div>
+<p>Les exemples comptent dans les limites d’enregistrement. Même sans limite de nombre avec PRO, des limites de sécurité s’appliquent notamment à la longueur des expressions et à la taille des nombres. PRO ne change pas la précision des calculs.</p>
+<p>Les achats et leur restauration se font depuis l’écran PRO. Ce guide ne garantit pas le transfert d’un achat entre des systèmes d’exploitation ou des boutiques différents.</p>
+
+      <p class="back-to-toc"><a href="#toc">Retour au sommaire</a></p>
+    </section>
+    <section id="section-13">
+      <h2>13. Problèmes d’enregistrement et de lecture des données</h2>
+
+<h3>13.1 Si les données ne peuvent pas être enregistrées</h3><p>Si l’enregistrement d’ANS + HISTORY ou de la mémoire échoue, un avertissement de données non enregistrées apparaît sous l’en-tête de l’accueil et de HISTORY. Vous pouvez continuer les calculs et les opérations sur l’historique avec les dernières valeurs disponibles tant que l’avertissement est affiché.</p>
+<ul><li>« Réessayer » : tente à nouveau d’enregistrer les dernières données concernées par l’échec.</li><li>« Ignorer » : masque l’avertissement pour ces données pendant la session actuelle de l’application. Cela ne signifie pas que l’enregistrement a réussi et n’arrête pas les enregistrements automatiques.</li></ul>
+<div class="note warning"><p>Si vous fermez l’application avec des données non enregistrées, leur contenu le plus récent peut être perdu. Il n’est pas garanti que l’enregistrement soit terminé à la fermeture de l’application. Si vous avez des valeurs importantes, ne fermez pas l’application en ignorant l’avertissement.</p></div>
+<h3>13.2 Erreurs de lecture d’ANS, de HISTORY ou de la mémoire</h3><p>Si un problème est détecté dans les données enregistrées d’ANS, de HISTORY ou de la mémoire, une boîte de dialogue de récupération apparaît. Lorsque la récupération est possible, OK reconstruit le stockage en donnant la priorité aux données utilisables ; le contenu irrécupérable est réinitialisé. Les erreurs non prises en charge ne déclenchent pas de réinitialisation forcée. Lisez la confirmation avant d’agir.</p>
+
+      <p class="back-to-toc"><a href="#toc">Retour au sommaire</a></p>
+    </section>
+    <section id="section-14">
+      <h2>14. Migration et récupération après une mise à jour</h2>
+
+<p>Ce chapitre s’adresse aux personnes qui utilisaient CalcPad avant la version 2.0.0 et ont effectué une mise à jour. Si votre première installation était la version 2.0.0 ou une version ultérieure, vous n’avez normalement pas besoin des opérations décrites ici.</p>
+<h3>14.1 Reprise des données lors de la mise à jour</h3><p>Les préréglages et formules existants sont migrés vers le nouveau format pour continuer à être utilisés. <strong>L’ancien historique de copie n’est pas transféré vers le nouveau HISTORY et est supprimé par cette mise à jour.</strong> Le nouveau HISTORY commence à enregistrer les calculs réussis après la mise à jour.</p>
+<h3>14.2 Si la migration des anciens préréglages ou formules échoue</h3><p>Un message d’erreur de migration peut apparaître dans la liste de préréglages ou de formules concernée. Les opérations suivantes ne sont disponibles que si l’application confirme qu’il est possible de recommencer en toute sécurité après cet échec de migration.</p>
+<ol><li><strong>Réessayer :</strong> essayez d’abord à nouveau de migrer les données d’origine.</li><li><strong>Repartir des exemples :</strong> remplace uniquement le groupe concerné par des exemples, soit 3 préréglages ou 2 formules.</li><li><strong>Repartir de zéro :</strong> remet uniquement le groupe concerné à 0 élément pour permettre de nouveaux enregistrements.</li></ol>
+<p>Pour les deux dernières options, lisez le groupe concerné, le nombre d’éléments et les autres détails de la confirmation. Aucune donnée n’est supprimée avant l’appui sur « Supprimer les anciennes données et démarrer ». Annuler ne lance pas l’opération.</p>
+<div class="note warning"><strong>Les anciennes données supprimées ne peuvent pas être récupérées</strong><p>Les anciennes données du groupe concerné sont supprimées. L’autre groupe et les réglages ne changent pas. Si vous souhaitez conserver un contenu, vérifiez la situation sans le supprimer.</p></div>
+<p>Les options de suppression sont indisponibles si la cause ou le périmètre de suppression ne peut pas être établi avec certitude, notamment en cas d’erreur temporaire de lecture ou d’écriture, ou de format inconnu. Ce n’est pas un bouton de réinitialisation pour tous les problèmes de stockage. Réessayez ou redémarrez l’application et consultez les indications.</p>
+<p>Le message « Les nouvelles données sont disponibles. Le nettoyage des anciennes données reste en attente et sera réessayé en sécurité au prochain démarrage. » indique qu’une nouvelle tentative de nettoyage aura lieu en toute sécurité au prochain lancement.</p>
+
+      <p class="back-to-toc"><a href="#toc">Retour au sommaire</a></p>
+    </section>
+    <section id="section-15">
+      <h2>15. Réglages et précautions d’utilisation</h2>
+
+<h3>15.1 Langue, apparence et vibration</h3><p>Dans les Réglages, vous pouvez modifier la Langue, l’Apparence et la Vibration des boutons. Le japonais, l’anglais, le français, le coréen et l’espagnol sont disponibles. Pour l’apparence, choisissez Système, Clair ou Sombre. Consultez aussi « Affichage de la calculatrice » pour les séparateurs décimaux et de milliers.</p>
+<h3>15.2 Importer à nouveau les exemples</h3><p>« Importer les exemples » dans les Réglages remplace <strong>à la fois</strong> les préréglages et les formules actuels par les exemples. Les réglages ne changent pas. Cela diffère de l’importation au premier lancement ou de la reprise d’un seul groupe après une erreur de migration. Lisez la confirmation avant d’agir.</p>
+<h3>15.3 Erreurs de saisie et limites de calcul</h3><ul><li>Fermez les parenthèses et les délimiteurs de valeur absolue. Une expression incomplète comme <code>sin(30</code> ne peut pas être calculée.</li><li>Certains calculs, tels que <code>1 ÷ 0</code>, <code>√(-1)</code> ou <code>log(0)</code>, ne sont pas pris en charge.</li><li>La taille des nombres ou la complexité des expressions peut atteindre des limites de sécurité empêchant le calcul ou l’enregistrement.</li><li>Ne considérez pas les résultats approchés ou arrondis comme des valeurs exactes de précision infinie. Pour un usage important, vérifiez la saisie, les unités, l’arrondi et le résultat.</li></ul>
+<h3>15.4 Protéger vos données</h3><p>La désinstallation supprime les données stockées sur l’appareil. Avec PRO, sauvegardez régulièrement les formules, préréglages et réglages concernés dans un fichier, puis vérifiez son enregistrement à destination. ANS, HISTORY et la mémoire ne sont pas inclus dans les sauvegardes : n’en faites pas votre seul moyen de conserver des informations importantes.</p>
+
+      <p class="back-to-toc"><a href="#toc">Retour au sommaire</a></p>
+    </section>
+    <footer><p>Guide d’utilisation de CalcPad · 2.0.0 · Français</p><p><a href="#top">Retour en haut de page</a></p></footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The CalcPad 2.0.0 User Guide. Learn to use the calculator, ANS, HISTORY, memory, presets, formulas, functions, backup, and data recovery.">
+  <title>CalcPad User Guide — 2.0.0 (English)</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --accent: #0f766e;
+      --accent-soft: #e6fffa;
+      --code-bg: #f3f4f6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", sans-serif;
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    .page {
+      width: min(100%, 920px);
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    header,
+    nav,
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      line-height: 1.35;
+      margin-top: 0;
+      color: var(--text);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      font-size: 1.12rem;
+      margin-top: 24px;
+      margin-bottom: 8px;
+    }
+
+    h4 {
+      font-size: 1rem;
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    ul,
+    ol {
+      padding-left: 1.4em;
+      margin-top: 8px;
+      margin-bottom: 14px;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .lead {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .toc-list {
+      columns: 1;
+      list-style-position: inside;
+      padding-left: 0;
+    }
+
+    .toc-sublist {
+      list-style-position: inside;
+      margin-top: 6px;
+      margin-bottom: 0;
+      padding-left: 1.2em;
+      font-size: 0.95rem;
+    }
+
+    .note {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin: 14px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 18px;
+      overflow-wrap: anywhere;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f9fafb;
+      font-weight: 700;
+    }
+
+    td.numeric {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      background: var(--code-bg);
+      border-radius: 6px;
+      padding: 0.08em 0.35em;
+      font-size: 0.95em;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border-radius: 12px;
+      padding: 12px 14px;
+      overflow-x: auto;
+      margin: 10px 0 16px;
+      border: 1px solid var(--border);
+    }
+
+    pre code {
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+      font-size: 0.94em;
+      white-space: pre;
+    }
+
+    .back-to-toc {
+      margin-top: 22px;
+      margin-bottom: 0;
+      text-align: right;
+      font-size: 0.95rem;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 16px 12px 40px;
+      }
+
+      header,
+      nav,
+      section {
+        padding: 16px;
+        border-radius: 14px;
+      }
+
+      h1 {
+        font-size: 1.55rem;
+      }
+
+      h2 {
+        font-size: 1.22rem;
+      }
+
+      table {
+        font-size: 0.94rem;
+      }
+    }
+
+    html { scroll-behavior: auto; }
+    body { overflow-wrap: anywhere; }
+    section, nav, header { min-width: 0; }
+    [id] { scroll-margin-top: 16px; }
+    code { overflow-wrap: anywhere; }
+    pre code { overflow-wrap: normal; }
+    .table-scroll { overflow-x: auto; max-width: 100%; }
+    .table-scroll:focus { outline: 2px solid var(--accent); }
+    .warning { background: #fff7ed; border-left-color: #b45309; }
+    .version { color: var(--muted); }
+    .key { font-weight: 700; }
+    footer { padding: 12px 8px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header id="top">
+      <h1>CalcPad User Guide</h1>
+      <p class="version">2.0.0 · English</p>
+      <p class="lead">Calculate, recall results, and save the values and formulas you use often. Follow along in the app as you explore this guide.</p>
+    </header>
+    <nav id="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol class="toc-list">
+        <li><a href="#section-1">What you can do with CalcPad</a></li>
+        <li><a href="#section-2">Using the calculator</a></li>
+        <li><a href="#section-3">Using ANS</a></li>
+        <li><a href="#section-4">Using HISTORY</a></li>
+        <li><a href="#section-5">Using memory</a></li>
+        <li><a href="#section-6">Using presets</a></li>
+        <li><a href="#section-7">Creating formulas</a></li>
+        <li><a href="#section-8">Running saved formulas</a></li>
+        <li><a href="#section-9">Using functions</a><ul class="toc-sublist"><li><a href="#function-scientific">E, π, and e</a></li><li><a href="#function-list">Functions and examples</a></li><li><a href="#function-arguments">Commas in min/max</a></li><li><a href="#function-applications">Practical examples</a></li></ul></li>
+        <li><a href="#section-10">Calculation precision and display settings</a></li>
+        <li><a href="#section-11">Backup and restore</a></li>
+        <li><a href="#section-12">Free and PRO</a></li>
+        <li><a href="#section-13">Problems saving or loading data</a></li>
+        <li><a href="#section-14">Data migration and recovery after upgrading</a></li>
+        <li><a href="#section-15">Settings and usage notes</a></li>
+
+      </ol>
+    </nav>
+    <section id="section-1">
+      <h2>1. What you can do with CalcPad</h2>
+
+<p>CalcPad combines a regular calculator with reusable saved values and formulas. This guide also refers to saved formulas as “templates.”</p>
+<ul><li>Calculate with arithmetic operators, parentheses, percentages, and powers</li><li>Recall your latest result with ANS and earlier results from HISTORY</li><li>Add values to or subtract values from memory to keep a running total</li><li>Save frequently used numbers as presets and repeated calculations as formulas</li><li>Use functions and constants. Some functions, as well as backup and restore, require PRO.</li></ul>
+<p>Start with <a href="#section-2">a regular calculation</a>, then try reusing the result with <a href="#section-3">ANS</a> or <a href="#section-4">HISTORY</a>.</p>
+<div class="note"><strong>Importing samples on first launch</strong><p>If “Import sample data?” appears when you first open the app, choose “Import” to add 2 formulas and 3 presets. Choose “Skip” to start empty instead. Both options are available in Free.</p><p>The current samples include formulas such as BMI and presets for centimeters/inches, standard gravity g, and the golden ratio φ. You can edit or delete the samples.</p></div>
+
+      <p class="back-to-toc"><a href="#toc">Back to contents</a></p>
+    </section>
+    <section id="section-2">
+      <h2>2. Using the calculator</h2>
+
+<h3>2.1 Entering and calculating</h3><ol><li>Tap numbers and operators. For example: <code>1200 × 5 × 80%</code>.</li><li>Tap <code>=</code> (with ENTER underneath).</li><li>The expression and result, <code>4800</code>, appear in the display’s Log.</li></ol>
+<p><code>80%</code> means <code>0.8</code>. <code>200 + 10%</code> equals <code>200.1</code>. To increase 200 by 10%, enter <code>200 × (1 + 10%)</code>.</p>
+<h3>2.2 Correcting your input</h3><ul><li>Tap the input line to move the cursor. You can also use <code>◀</code>/<code>▶</code> to move left or right.</li><li><code>⌫</code> deletes immediately before the cursor.</li><li>A normal tap on <code>C/AC</code> clears the expression you are entering. In regular calculator mode, a long press clears both the input and the on-screen Log.</li><li>C/AC does not clear ANS, HISTORY, or memory.</li></ul>
+<h3>2.3 Parentheses, powers, and continuing a calculation</h3><p>You can enter expressions such as <code>(2 + 3) × 4 = 20</code> and <code>2 ^ 3 = 8</code>. Multiplication and division are evaluated before addition and subtraction. To use a result in another calculation, recall it with ANS instead of typing it again.</p>
+<h3>2.4 Reusing the Log</h3>
+<p>The Log shows the calculation steps on the current screen. <strong>Long-press a completed expression line</strong> to insert that expression at the cursor in the current input line. For example, recall <code>100×1.1+500</code>, change 100 to 200, and calculate again.</p>
+<p><strong>Long-press a result line</strong> to insert the result as a confirmed value in parentheses. You can reuse the stored calculation value even when its display is rounded. You can also long-press a confirmed variable line from a formula (template); only its number is inserted as a confirmed value, without the variable name or unit.</p>
+<p>This inserts content into CalcPad’s input line; it does not copy it to the system clipboard. A long press does not run a calculation. Make any further entries or edits, then tap <code>=</code> to calculate. Clearing the Log does not remove records from HISTORY.</p>
+
+      <p class="back-to-toc"><a href="#toc">Back to contents</a></p>
+    </section>
+    <section id="section-3">
+      <h2>3. Using ANS</h2>
+
+<p>ANS stores one value: the result of the most recent successful calculation. This includes regular calculations and the final result of a completed formula. A failed calculation or an intermediate variable entry leaves the previous ANS unchanged.</p>
+<h3>3.1 Recalling the latest result</h3><ol><li>Enter <code>12 × 8</code> and tap <code>=</code> to get <code>96</code>.</li><li>Tap <code>ANS</code> normally. A green value in parentheses is inserted at the cursor.</li><li>Continue with <code>÷ 3</code> and tap <code>=</code> to get <code>32</code>.</li></ol>
+<p>Recall inserts the value stored at that moment. Later changes to ANS do not change a value you have already inserted. It reuses the stored calculation value rather than copying only the digits visible after display rounding or truncation.</p>
+<h3>3.2 Keeping, updating, and clearing ANS</h3><ul><li>If ANS has not been set, a normal tap inserts nothing. Zero is a valid calculation result.</li><li>Once successfully saved, ANS is retained when you reopen the app.</li><li>A new successful result replaces ANS. There is no separate button to clear only ANS.</li><li>Deleting HISTORY or using MC does not clear ANS. <strong>ANS is not included in backups.</strong></li></ul>
+<div class="note"><p><code>ANS</code> opens HISTORY when you <strong>long-press</strong> it. This differs from a normal tap, which inserts the value.</p></div>
+
+      <p class="back-to-toc"><a href="#toc">Back to contents</a></p>
+    </section>
+    <section id="section-4">
+      <h2>4. Using HISTORY</h2>
+
+<p>HISTORY automatically records the expressions and results of successful calculations. It keeps up to 30 entries, removing the oldest when that limit is exceeded. It records regular calculations and final formula results, but not intermediate variable results or actions that only insert a value.</p>
+<p><strong>Each expression stays as it appeared when you calculated it.</strong> Changing decimal places, rounding, decimal or grouping separators, or the app language later does not change a recorded expression. For formulas (templates), HISTORY shows the expression with the values used for its variables, along with the formula’s name at the time.</p>
+<p>For example, with 6 decimal places and round-to-nearest, <code>1÷3</code> displays a result of <code>0.333333</code>. Insert ANS and calculate <code>(0.333333)×3</code> to display <code>1</code>. The expressions in HISTORY remain <code>1÷3</code> and <code>(0.333333)×3</code>. They are not expanded into long internal numbers, and ordinary display rounding does not add ≒. If a nonzero value displays as zero, the <code>≒ 0</code> indication is retained.</p>
+<p><strong>Result displays</strong> keep the decimal places and rounding method used when you calculated them. Only decimal and grouping separators follow your current display settings. A rounded expression or result on screen does not mean the stored calculation result has been rounded to those display digits. The retained high-precision value remains available for reuse.</p>
+<h3>4.1 Recalling an earlier result</h3><ol><li>Long-press <code>ANS</code> on the home screen. HISTORY appears underneath the main label.</li><li>The newest entries are at the bottom. Scroll up to see older entries.</li><li>Tap the expression or result area of the entry you want.</li><li>If insertion succeeds, you return to the calculator with a confirmed value in parentheses at the cursor.</li></ol>
+<p>This inserts the saved <strong>result</strong>. It does not recalculate the recorded expression or recall it as an editable expression. Insertion alone does not update ANS, HISTORY, the Log, or memory.</p>
+<h3>4.2 Actions on each entry</h3><div class="table-scroll" tabindex="0" aria-label="HISTORY actions"><table><thead><tr><th scope="col">Action</th><th scope="col">What it does</th></tr></thead><tbody><tr><td>M+/M-</td><td>Adds this entry’s result to memory or subtracts it from memory. These use a different value from M+/M- on the home screen.</td></tr><tr><td>Three-dot menu → Save as preset</td><td>Saves the result with a name while retaining its value. A formula entry uses the formula name as the initial name.</td></tr><tr><td>Three-dot menu → Copy to OS</td><td>Copies the result’s number to the device clipboard so you can paste it into another app. It does not copy the whole expression.</td></tr><tr><td>Three-dot menu → Delete</td><td>Deletes that entry.</td></tr></tbody></table></div>
+<h3>4.3 Clearing and keeping history</h3><p>Tap the clear-all button at the top, review “Clear all history?”, and choose “Clear.” Deleted entries cannot be recovered. Deleting one entry or clearing all entries does not change ANS or memory.</p>
+<p>After a successful save, HISTORY remains available the next time you open the app. <strong>It is not included in backups.</strong> For save failures, see <a href="#section-13">Problems saving or loading data</a>.</p>
+
+      <p class="back-to-toc"><a href="#toc">Back to contents</a></p>
+    </section>
+    <section id="section-5">
+      <h2>5. Using memory</h2>
+
+<p>Memory lets you add or subtract several results to keep a running total. It starts at zero and appears as <code>M = …</code> at the top of the home screen and the bottom of HISTORY.</p>
+<div class="table-scroll" tabindex="0" aria-label="Memory key actions"><table><thead><tr><th scope="col">Key</th><th scope="col">Action on the home screen</th></tr></thead><tbody><tr><td>MC</td><td>Resets memory to exact zero.</td></tr><tr><td>MR</td><td>Inserts the current memory value at the cursor without clearing memory.</td></tr><tr><td>M+</td><td>Adds the most recent successful calculation result (ANS).</td></tr><tr><td>M-</td><td>Subtracts the most recent successful calculation result (ANS).</td></tr></tbody></table></div>
+<h3>5.1 Adding 100 and 30</h3><ol><li>Tap <code>MC</code> to set memory to zero.</li><li>Enter <code>100</code>, tap <code>=</code>, then <code>M+</code>. Memory is now 100.</li><li>Enter <code>30</code>, tap <code>=</code>, then <code>M+</code>. Memory is now 130.</li><li>Tap <code>MR</code> to insert 130 into the input line. If ANS is still 30, pressing <code>M-</code> makes memory 100.</li></ol>
+<div class="note"><strong>Check which value M+/M- will use</strong><p>On the home screen, these keys use ANS, not the number currently being entered. Typing 100 and then pressing M+ does not necessarily add 100. First complete a successful calculation with <code>=</code>. If ANS is unset, memory does not change. While entering formula variables, M+/M- still use the latest final successful result.</p></div>
+<h3>5.2 Memory actions in HISTORY</h3><p>M+/M- on a history entry use that entry’s result. In the bottom bar, tap the <code>M = …</code> area to the left of MC to insert memory, just as with MR, and return to the calculator. MC clears only memory to zero and keeps HISTORY open.</p>
+<p>Adding to or subtracting from memory, or using MC, does not change your expression, ANS, or history. MR only inserts a value; insertion alone creates no new successful calculation record. Memory is retained after restarting once it has been saved successfully, but <strong>it is not included in backups</strong>. <code>M = —</code> means memory is unavailable; it is not a normal zero.</p>
+
+      <p class="back-to-toc"><a href="#toc">Back to contents</a></p>
+    </section>
+    <section id="section-6">
+      <h2>6. Using presets</h2>
+
+<p>Presets save frequently used numbers with names, such as unit prices, tax rates, or conversion factors. Unlike memory, they are intended for recalling the same value repeatedly rather than adding or subtracting values.</p>
+<h3>6.1 Saving a preset</h3><ol><li>Tap <code>PRE</code> to open “Presets.”</li><li>Tap <code>＋</code> at the top right to add one.</li><li>Enter a value and an optional label, then save. For example: label “Hourly rate,” value <code>1500</code>.</li></ol>
+<p>To keep a calculation result, choose “Save as preset” from the three-dot menu in HISTORY. You do not need to retype the rounded digits shown on screen. For this action, the value is fixed and you can change its name.</p>
+<h3>6.2 Recalling and editing presets</h3><ul><li>Open <code>PRE</code> and tap an entry to insert it at the cursor as a green confirmed value in parentheses.</li><li>Use an entry’s three-dot menu to choose “Edit” or “Delete.”</li><li>Choose “Reorder,” drag entries into order, and tap “Done” to return to the normal view.</li></ul>
+<p>Free allows up to 5 presets, including the 3 first-launch samples. The current samples are “cm / inch: 2.54,” “Standard gravity g: 9.80665,” and “Golden Ratio (φ): 1.618.” Enter π from <code>FUNC</code> rather than from a preset.</p>
+<p>Presets are included in backups. Updating the samples does not automatically replace presets you have already saved.</p>
+
+      <p class="back-to-toc"><a href="#toc">Back to contents</a></p>
+    </section>
+    <section id="section-7">
+      <h2>7. Creating formulas</h2>
+
+<p>If you repeat the same calculation, save a formula so you only need to enter the values that change. This example creates “Unit price × Quantity × 1.1.”</p>
+<ol><li>Tap <code>ƒ(x)</code> to open “Formulas,” then tap <code>＋</code> at the top right.</li><li>Under “Basic Information,” enter a name such as “Total including tax” in “Formula name (required).” The description is optional.</li><li>Under “Calculation Result Settings,” choose the result label, decimal places, and rounding method.</li><li>Use the add button under “Variables” to register “Unit price” (key a) and “Quantity” (key b), both with the Number type.</li><li>In “Expression,” use the variable buttons, operators, and numbers to build <code>a × b × 1.1</code>.</li><li>Tap “Save.”</li></ol>
+<h3>7.1 What is a variable?</h3><p>A variable is a value you enter each time you run a formula. For example, its name might be “Unit price” and its key in the expression <code>a</code>. An initial value can be set as an input suggestion. To save a formula, register at least one variable and use at least one registered variable in the expression. You do not have to use every variable you register.</p>
+<p>Choose the Number or Percent (%) type. A percent variable button inserts a form such as <code>a%</code>; entering 10 when running the formula then means 10%. Do not also divide it by 100 in the expression.</p>
+<p>Lowercase <code>e</code> is reserved for Euler's number and cannot be used as a variable key.</p>
+<h3>7.2 Functions, rounding, and editing</h3><p>The function button in the expression editor is labeled “Func.” E, π, and e are available in Free; other functions require PRO. Each formula saves its own angle unit for trigonometric functions.</p>
+<div class="note"><strong>A formula’s decimal places determine its finalized result</strong><p>The decimal places and rounding method set here apply to the final result itself. This differs from changing only the home screen’s display digits. ANS and HISTORY also record this finalized result.</p></div>
+<p>Use a formula’s three-dot menu in the list to edit or delete it. “Reorder” lets you change the order. To delete a variable used in an expression, remove it from the expression first. Deletion cannot be undone.</p>
+
+      <p class="back-to-toc"><a href="#toc">Back to contents</a></p>
+    </section>
+    <section id="section-8">
+      <h2>8. Running saved formulas</h2>
+
+<ol><li>Tap <code>ƒ(x)</code> to open the formula list, then tap the formula you want.</li><li>Enter a value for the displayed variable and confirm with <code>=</code>/ENTER.</li><li>When the next variable appears, enter and confirm its value in the same way.</li><li>After you confirm the last variable, the result appears.</li></ol>
+<p>For “Unit price × Quantity × 1.1,” a unit price of 1200 and quantity of 3 give a result of 3960.</p>
+<pre><code>[Unit price] = 1200
+[Quantity] = 3
+[Result] = 3960</code></pre>
+<p>Variable input fields also accept calculations such as <code>1200 × 2</code> and values inserted from ANS, MR, presets, or HISTORY. Insertion is unavailable when input is not accepted, such as after the result is displayed.</p>
+<p>A successful final result updates ANS and is recorded in HISTORY with the formula name. Intermediate variable entries do not update ANS. To stop entering values and return to the regular calculator, long-press <code>C/AC</code>.</p>
+
+      <p class="back-to-toc"><a href="#toc">Back to contents</a></p>
+    </section>
+    <section id="section-9">
+      <h2>9. Using functions</h2>
+
+<p>Tap <code>FUNC</code> on the home screen to open the function keypad. It has the following 4-column × 4-row layout. <strong>E, π, and e are available in Free; the other 13 keys require PRO.</strong></p>
+<div class="table-scroll" tabindex="0" aria-label="Function keypad layout"><table><tbody><tr><td>E</td><td>π</td><td>e</td><td>eˣ</td></tr><tr><td>sin</td><td>cos</td><td>tan</td><td>√</td></tr><tr><td>log</td><td>ln</td><td>max</td><td>min</td></tr><tr><td>round</td><td>floor</td><td>ceil</td><td>|x|</td></tr></tbody></table></div>
+<p>When a function button inserts parentheses or other symbols, enter the value at the cursor. Open “Function Help” for the app’s function explanations.</p>
+<h3 id="function-scientific">9.1 Scientific notation E and the constants π and e</h3><ul><li><code>1.2E3</code> means <code>1.2 × 10^3 = 1200</code>. <code>1.2E-3</code> means <code>0.0012</code>. Enter E after a number, then enter the exponent. E on its own, or an unfinished exponent, cannot be calculated.</li><li><code>π</code> is pi. The area of a circle with radius 5 is <code>π × 5 ^ 2</code>, approximately <code>78.539816</code> (shown to 6 decimal places).</li><li>Lowercase <code>e</code> is Euler’s number, approximately <code>2.718282</code>. It differs from uppercase E in scientific notation.</li></ul>
+<h3 id="function-list">9.2 Functions and input examples</h3><p>The function keys below require PRO. Results are display examples; some functions use approximate calculations.</p>
+<div class="table-scroll" tabindex="0" aria-label="Functions and calculation examples"><table><thead><tr><th scope="col">Key and purpose</th><th scope="col">Example input</th><th scope="col">Example result</th></tr></thead><tbody>
+<tr><td>eˣ: e raised to a power</td><td><code>e^(2)</code></td><td>Approx. 7.389056</td></tr>
+<tr><td>sin: sine</td><td><code>sin(30)</code></td><td>0.5 (DEG)</td></tr><tr><td>cos: cosine</td><td><code>cos(60)</code></td><td>0.5 (DEG)</td></tr><tr><td>tan: tangent</td><td><code>tan(45)</code></td><td>1 (DEG)</td></tr>
+<tr><td>√: square root</td><td><code>√(9)</code></td><td>3</td></tr><tr><td>log: base-10 logarithm</td><td><code>log(100)</code></td><td>2</td></tr><tr><td>ln: base-e logarithm</td><td><code>ln(e)</code></td><td>1</td></tr>
+<tr><td>max: maximum</td><td><code>max(240 ÷ 2, 138, 15 × 10)</code></td><td>150</td></tr><tr><td>min: minimum</td><td><code>min(240 ÷ 2, 138, 15 × 10)</code></td><td>120</td></tr>
+<tr><td>round: round to nearest</td><td><code>round(12.6)</code></td><td>13</td></tr><tr><td>floor: round down to an integer</td><td><code>floor(-1.2)</code></td><td>-2</td></tr><tr><td>ceil: round up to an integer</td><td><code>ceil(-1.2)</code></td><td>-1</td></tr><tr><td>|x|: absolute value</td><td><code>|1200 - 1500|</code></td><td>300</td></tr>
+</tbody></table></div>
+<h3 id="function-arguments">9.3 min/max and commas</h3><p>min/max require at least 2 values. In the regular calculator, <code>, NEXT ARG</code> appears at the bottom right of the calculation display when the cursor is within their arguments. At a valid insertion position, tapping it inserts a comma and a space. In the expression editor, use the expression builder’s comma button.</p>
+<p>The comma separates arguments here. Do not confuse it with digit grouping: enter expressions such as <code>max(100, 200)</code>. <code>max(100, )</code> is incomplete because its last value is missing.</p>
+<h3 id="function-applications">9.4 Practical examples</h3><p>If you need 13 items and each box contains 6, the number of boxes required is <code>ceil(13 ÷ 6) = 3</code>.</p>
+<p>For a base fee of 3600 plus 100 per km beyond 10 km, use <code>3600 + 100 × max(0, a - 10)</code>, where a is the distance. The result is 3600 for a = 8, or 4100 for a = 15.</p>
+<p>To discount 20% of a price while limiting the discount to 1000, use <code>min(a × 20%, 1000)</code>, where a is the price. The discount is 600 for 3000, or 1000 for 8000.</p>
+<h3>9.5 Angle units and behavior after input</h3><p>Select DEG (degrees) or RAD (radians) in the regular calculator’s function sheet. The home header shows DEG/RAD when you are working with an expression containing trigonometric functions. Saved formulas use their own angle units, independently of the regular calculator setting.</p>
+<p>“Auto-close after input” is available in both Free and PRO. When ON, the regular calculator’s function sheet closes after successful insertion; when OFF, it stays open. The expression builder’s function sheet closes after successful insertion.</p>
+
+      <p class="back-to-toc"><a href="#toc">Back to contents</a></p>
+    </section>
+    <section id="section-10">
+      <h2>10. Calculation precision and display settings</h2>
+
+<h3>10.1 Calculated values and displayed values are different</h3><p>CalcPad calculates as accurately as possible when values can be handled as integers, decimals, or fractions. For example, <code>0.1 + 0.2</code> gives <code>0.3</code>. This does not mean every calculation is free of error.</p>
+<p>When a regular calculation is finalized, its result is normalized to at most 30 significant digits. Rounding that changes the value makes it approximate. Approximate calculations such as trigonometric functions and logarithms use 15 significant digits as their precision basis. π and e are also finite-digit approximations. The distinction between exact and approximate values is retained when you reuse them.</p>
+<p>Green confirmed values in parentheses inserted from ANS, MR, HISTORY, or presets may retain more digits than are visible. You cannot edit individual characters inside a block; deletion and similar operations apply to the whole block. To change the number, delete the block and enter a new value.</p>
+<h3>10.2 Calculator display settings</h3><ol><li>Open the settings icon at the top right of the home screen.</li><li>Under “Calculator display settings,” choose “Decimal places,” “Rounding,” “Decimal separator,” and the grouping options.</li></ol>
+<p>You can choose 0–12 decimal places. The decimal separator can be a dot or comma. The thousands separator can be none, comma, dot, or space, with grouping every 3 or 4 digits. Unnecessary trailing zeros are omitted.</p>
+<p>If you display 2 decimal places and calculate <code>1 ÷ 8</code>, you see <code>0.13</code>, but the calculated value remains 0.125. <code>ANS × 8</code> therefore gives 1. Changing display settings alone does not change the values stored in ANS, HISTORY, or memory.</p>
+<h3>10.3 Comparing rounding methods</h3><p>These examples round to 1 decimal place.</p><div class="table-scroll" tabindex="0" aria-label="Rounding positive and negative numbers"><table><thead><tr><th scope="col">Rounding</th><th scope="col">1.25</th><th scope="col">-1.25</th></tr></thead><tbody><tr><td>Round (ties away from zero)</td><td>1.3</td><td>-1.3</td></tr><tr><td>Round down (toward smaller values)</td><td>1.2</td><td>-1.3</td></tr><tr><td>Round up (toward larger values)</td><td>1.3</td><td>-1.2</td></tr></tbody></table></div>
+<p>“Round down” does not simply remove the fractional part of a negative number. Also, <code>round</code>/<code>floor</code>/<code>ceil</code> turn values into integers within an expression; they differ from display-only settings.</p>
+<div class="note"><p><strong>Each formula’s “Calculation Result Settings”</strong> round and finalize the value itself. Memory addition and subtraction also normalize the result to at most 30 significant digits after each operation. Remember that typing a rounded display value creates a different number from the original internal value.</p></div>
+<p>If a small nonzero value displays as zero at the chosen decimal places, it is shown as <code>≒ 0</code>. Large values may use scientific notation. This does not mean every approximate value is marked with ≒.</p>
+
+      <p class="back-to-toc"><a href="#toc">Back to contents</a></p>
+    </section>
+    <section id="section-11">
+      <h2>11. Backup and restore</h2>
+
+<p>Backup and restore are <strong>PRO features</strong>. Open Settings → “Backup &amp; restore.”</p>
+<h3>11.1 What is and is not included</h3><ul><li><strong>Included:</strong> Formulas and variable definitions, presets, language, theme, button vibration, and calculator display settings.</li><li><strong>Not included:</strong> ANS, HISTORY, memory, the on-screen Log, unfinished input, and regular calculator function settings (DEG/RAD and auto-close after input).</li></ul>
+<p>Each formula’s (template’s) angle unit is included in its formula definition.</p>
+<p>A backup does not copy every aspect of the app’s state on your device. To keep an important result, save it to presets from HISTORY; it can then be backed up as a preset.</p>
+<p>Your PRO purchase is managed through your App Store or Google Play purchase history. Restoring a CalcPad data backup does not cancel the purchase itself. If you have purchased PRO but cannot use its features, use the same store account you purchased with and try “Restore purchases” on the PRO screen.</p>
+<h3>11.2 Creating a backup</h3><ol><li>Tap “Save backup.”</li><li>Choose a sharing or save destination and save the JSON file.</li><li>Check the destination in your files app or cloud storage to make sure the file was actually saved.</li></ol>
+<h3>11.3 Restoring a backup</h3><ol><li>If needed, back up your current formulas, presets, and settings first.</li><li>Tap “Restore from backup.”</li><li>Read the “Restore (overwrite)” confirmation and choose “Restore.”</li><li>Select your saved backup file.</li></ol>
+<div class="note warning"><strong>Restoring completely overwrites the target data</strong><p>Your current formulas, presets, and included settings are replaced by the file’s contents. This is not an addition or merge, and it cannot be undone. ANS, HISTORY, and memory are not restored from the file.</p></div>
+<p>Older CalcPad backups can also be read if their format is supported. Files from other apps and unsupported formats cannot be used. If restoration fails, follow the displayed guidance rather than trying to modify the file yourself.</p>
+
+      <p class="back-to-toc"><a href="#toc">Back to contents</a></p>
+    </section>
+    <section id="section-12">
+      <h2>12. Free and PRO</h2>
+
+<div class="table-scroll" tabindex="0" aria-label="Free and PRO feature comparison"><table><thead><tr><th scope="col">Feature</th><th scope="col">Free</th><th scope="col">PRO</th></tr></thead><tbody><tr><td>Regular calculations, ANS, HISTORY, and memory</td><td>Available</td><td>Available</td></tr><tr><td>Saved formulas</td><td>Up to 3</td><td>No item limit</td></tr><tr><td>Saved presets</td><td>Up to 5</td><td>No item limit</td></tr><tr><td>E, π, and e</td><td>Available</td><td>Available</td></tr><tr><td>Other 13 function keys</td><td>Requires PRO</td><td>Available</td></tr><tr><td>Backup and restore</td><td>Requires PRO</td><td>Available</td></tr><tr><td>Ads</td><td>Shown</td><td>Not shown</td></tr></tbody></table></div>
+<p>Samples count toward the item limits. Even without PRO item limits, safety limits still apply to expression length, number size, and similar factors. PRO does not change calculation precision.</p>
+<p>Purchases and purchase restoration are handled on the PRO screen. This guide does not guarantee that a purchase entitlement can be transferred between different operating systems or stores.</p>
+
+      <p class="back-to-toc"><a href="#toc">Back to contents</a></p>
+    </section>
+    <section id="section-13">
+      <h2>13. Problems saving or loading data</h2>
+
+<h3>13.1 When data cannot be saved</h3><p>If saving ANS + HISTORY or memory fails, an unsaved-data warning appears below the header on the home and HISTORY screens. You can continue calculating and using history with the latest available values while the warning is shown.</p>
+<ul><li>“Retry”: Attempts to save the latest contents of the affected data again.</li><li>“Ignore”: Hides the warning for that data during the current app session. It does not mean saving succeeded, and it does not stop automatic saving.</li></ul>
+<div class="note warning"><p>If you close the app with unsaved data, the latest contents may be lost. Save completion when the app exits is not guaranteed. If you have important values, do not ignore the warning and close the app without checking.</p></div>
+<h3>13.2 Errors loading ANS, HISTORY, or memory</h3><p>If there is a problem with saved ANS, HISTORY, or memory data, a recovery dialog appears. Where recovery is supported, OK rebuilds storage, giving priority to usable data; unrecoverable contents are reset. Unsupported failures do not trigger a forced reset. Read the confirmation before proceeding.</p>
+
+      <p class="back-to-toc"><a href="#toc">Back to contents</a></p>
+    </section>
+    <section id="section-14">
+      <h2>14. Data migration and recovery after upgrading</h2>
+
+<p>This chapter is for people who used CalcPad before version 2.0.0 and then upgraded. If you first installed version 2.0.0 or later, you normally do not need the actions in this chapter.</p>
+<h3>14.1 What happens to data when you upgrade</h3><p>Existing presets and formulas are migrated to the new format for continued use. <strong>The old copy history is not carried over to the new HISTORY and is deleted by this update.</strong> The new HISTORY starts recording successful calculations made after the update.</p>
+<h3>14.2 When older presets or formulas cannot be migrated</h3><p>A migration error may appear in the affected preset or formula list. The following actions are available only when the app can confirm that the failed legacy-data migration can be safely restarted.</p>
+<ol><li><strong>Retry:</strong> First try migrating the original data again.</li><li><strong>Start with samples:</strong> Replaces only the affected data group with samples: 3 presets or 2 formulas.</li><li><strong>Start empty:</strong> Resets only the affected group to 0 items so you can register new ones.</li></ol>
+<p>For the last two options, review the group, item count, and other details in the confirmation dialog. Nothing is discarded until you press “Discard legacy data and start.” Canceling does not perform the operation.</p>
+<div class="note warning"><strong>Discarded legacy data cannot be recovered</strong><p>The old data in the affected group is deleted. The other group and settings are unchanged. If you need to keep any contents, check the situation without discarding them.</p></div>
+<p>Discard options are unavailable when the app cannot safely determine the cause or deletion scope, such as with temporary read/write failures or unknown formats. This is not a reset button for every storage problem. Retry or restart the app and review the guidance.</p>
+<p>The message “New data is available. Legacy data cleanup is pending and will be retried safely at the next launch.” means cleanup will be retried safely the next time the app starts.</p>
+
+      <p class="back-to-toc"><a href="#toc">Back to contents</a></p>
+    </section>
+    <section id="section-15">
+      <h2>15. Settings and usage notes</h2>
+
+<h3>15.1 Language, theme, and vibration</h3><p>In Settings, you can change Language, Appearance, and Button vibration. Japanese, English, French, Korean, and Spanish are supported, and Appearance can be set to System, Light, or Dark. For decimal and grouping separators, also check “Calculator display settings.”</p>
+<h3>15.2 Importing samples again</h3><p>“Import sample data” in Settings replaces <strong>both</strong> your current presets and formulas with samples. It does not change settings. This differs from first-launch import or restarting only one group after a migration error. Read the confirmation before proceeding.</p>
+<h3>15.3 Input errors and calculation limits</h3><ul><li>Close parentheses and absolute-value delimiters. Incomplete expressions such as <code>sin(30</code> cannot be calculated.</li><li>Some calculations, including <code>1 ÷ 0</code>, <code>√(-1)</code>, and <code>log(0)</code>, cannot be performed.</li><li>Number size or expression complexity may reach safety limits that prevent calculation or saving.</li><li>Do not treat approximate or rounded results as infinitely precise exact values. For important uses, check the input, units, rounding method, and result.</li></ul>
+<h3>15.4 Protecting your data</h3><p>Uninstalling the app removes data stored on the device. Use PRO to back up your formulas, presets, and settings regularly, and check that the files are saved at the destination. ANS, HISTORY, and memory are not in backups, so do not rely on them as the only place to keep important records.</p>
+
+      <p class="back-to-toc"><a href="#toc">Back to contents</a></p>
+    </section>
+    <footer><p>CalcPad User Guide · 2.0.0 · English</p><p><a href="#top">Back to top</a></p></footer>
+  </main>
+</body>
+</html>
